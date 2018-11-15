@@ -1,1 +1,6 @@
-Projet Micro-blogging
+Author :
+    Simon Dormeau
+
+Micro-blogging project
+
+
