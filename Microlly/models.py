@@ -7,3 +7,10 @@ class Post(models.Model):
     body = models.TextField()
     creation_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Publication"
+        verbose_name_plural = "Publications"
