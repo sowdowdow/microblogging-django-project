@@ -1,19 +1,18 @@
-# Projet MicroBlogging - Open Source
+# MicroBlogging Project - Open Source
 
 [![Build Status](https://travis-ci.org/sowdowdow/microblogging-django-project.svg?branch=master)](https://travis-ci.org/sowdowdow/microblogging-django-project)
 
 Author :
     Simon Dormeau
 
-This project is (proudly ?) made in french
+This project is (proudly ?) made in french.
 
 The goal of this one is to learn **Python**, **Django** and **TDD** at the same time *ough* !
-
 The concept is simple, a **public blog** where anybody can register and write some articles, delete or modify them.
 
-The practice of Test Driven Development is implemented through *Django* and tests are run by *TravisCI*.
+- The practice of Test Driven Development is implemented through *Django* and tests are run by *TravisCI*.
 
-Users are implemented through Django's Users while Posts are made by hand.
+- Users are implemented through Django's Users while Posts are made by hand.
 
 | Constraints |
 |---------------------------------------------------------------------------------------------------------------------|
