@@ -5,7 +5,7 @@ from Microlly.models import Post
 
 
 class WebsiteTestCase(TestCase):
-    #fixtures = ["initial.json"]
+    fixtures = ["initial.json"]
 
     def test_index_page(self):
         print("check nothing")
