@@ -8,10 +8,9 @@ class WebsiteTestCase(TestCase):
     fixtures = ["initial.json"]
 
     def test_index_page(self):
-        print("check nothing")
-        #response = self.client.get(reverse("Microlly:index"))
+        response = self.client.get(reverse("Microlly:index"))
         #self.assertContains(response, "posts")
-        #self.assertEqual(type(response.context["posts"]), QuerySet)
-        #self.failUnlessEqual(response.status_code, 200)
-        #self.assertTemplateUsed("Post/index.html")
+        self.assertEqual(type(response.context["posts"]), QuerySet)
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertTemplateUsed("Post/index.html")
 
