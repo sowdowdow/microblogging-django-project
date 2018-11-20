@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from Microlly.models import Post
+from django.contrib.auth.models import User
 
 def index(request):
     posts = Post.objects.all()

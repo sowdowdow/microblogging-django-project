@@ -8,11 +8,15 @@ class WebsiteTestCase(TestCase):
     fixtures = ["initial.json"]
 
     def test_index_page(self):
-        # getting the wanted page
         response = self.client.get(reverse("Microlly:index"))
-        # This one check for text in the rendered html
         self.assertContains(response, "Liste des dernières publications")
         self.assertEqual(type(response.context["posts"]), QuerySet)
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed("Post/index.html")
+        self.assertTemplateUsed(response, "index.html")
+    
+    def test_login_page(self):
+        response = self.client.get(reverse("Microlly:login"))
+        self.assertContains(response, "Connexion")
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "registration/login.html")
 

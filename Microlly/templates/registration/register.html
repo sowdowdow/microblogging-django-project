@@ -7,18 +7,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <h1>Connexion</h1>
-        <form method="post" action="{% url 'Microlly:login' %}">
+        <h1>Créer un compte</h1>
+        <form method="post" action="{% url 'Microlly:register' %}">
             {% csrf_token %}
-            {{ form.username.label_tag }}
-            {{ form.username }}
-            {{ form.password.label_tag }}
-            {{ form.password }}
+            <pre>{% debug %}</pre>
             <input type="submit" value="S'inscrire">
             {{ form.errors }}
         </form>
-        <p>
-            {# <a href="{% url 'Microlly:register' %}">Créer un compte</a> #}
-        </p>
     </body>
 </html>
