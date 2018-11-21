@@ -19,4 +19,10 @@ class WebsiteTestCase(TestCase):
         self.assertContains(response, "Connexion")
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "registration/login.html")
+    
+    def test_signup_page(self):
+        response = self.client.get(reverse("Microlly:signup"))
+        self.assertContains(response, "Créer un compte")
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "registration/signup.html")
 
