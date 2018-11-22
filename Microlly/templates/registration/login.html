@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Login</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <h1>Connexion</h1>
-        <form method="post" action="{% url 'Microlly:login' %}">
-            {% csrf_token %}
-            {{ form.username.label_tag }}
-            {{ form.username }}
-            {{ form.password.label_tag }}
-            {{ form.password }}
-            <input type="submit" value="S'inscrire">
-            {{ form.errors }}
-        </form>
-        <p>
-            {# <a href="{% url 'Microlly:register' %}">Créer un compte</a> #}
-        </p>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Connexion</h1>
+<form method="post" action="{% url 'Microlly:login' %}">
+    {% csrf_token %}
+    {{ form.username.label_tag }}
+    {{ form.username }}
+    {{ form.password.label_tag }}
+    {{ form.password }}
+    <input type="submit" value="S'inscrire">
+    {{ form.errors }}
+</form>
+<p>
+    {# <a href="{% url 'Microlly:register' %}">Créer un compte</a> #}
+</p>
+{% endblock body %}
