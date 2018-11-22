@@ -1,0 +1,100 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+0001_initial.py	../Microlly/migrations/0001_initial.py	1;"	kind:file	line:1
+ALLOWED_HOSTS	../microblogging/settings.py	/^ALLOWED_HOSTS = []$/;"	kind:variable	line:28
+AUTH_PASSWORD_VALIDATORS	../microblogging/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:88
+AppConfig	../Microlly/apps.py	/^from django.apps import AppConfig$/;"	kind:namespace	line:1
+BASE_DIR	../microblogging/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:16
+DATABASES	../microblogging/settings.py	/^DATABASES = {$/;"	kind:variable	line:77
+DEBUG	../microblogging/settings.py	/^DEBUG = True$/;"	kind:variable	line:26
+INSTALLED_APPS	../microblogging/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:33
+LANGUAGE_CODE	../microblogging/settings.py	/^LANGUAGE_CODE = "fr-FR"$/;"	kind:variable	line:102
+LOGIN_REDIRECT_URL	../microblogging/settings.py	/^LOGIN_REDIRECT_URL = '\/admin'/;"	kind:variable	line:119
+MEDIA_ROOT	../microblogging/settings.py	/^MEDIA_ROOT = os.path.join(BASE_DIR, "media")$/;"	kind:variable	line:117
+MEDIA_URL	../microblogging/settings.py	/^MEDIA_URL = "\/media\/"$/;"	kind:variable	line:116
+MIDDLEWARE	../microblogging/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:43
+Meta	../Microlly/models.py	/^    class Meta:$/;"	kind:class	line:14
+MicrollyConfig	../Microlly/apps.py	/^class MicrollyConfig(AppConfig):$/;"	kind:class	line:4
+Migration	../Microlly/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Post	../Microlly/models.py	/^class Post(models.Model):$/;"	kind:class	line:5
+Post	../Microlly/tests.py	/^from Microlly.models import Post$/;"	kind:namespace	line:4
+Post	../Microlly/views.py	/^from Microlly.models import Post$/;"	kind:namespace	line:2
+PostAdmin	../Microlly/admin.py	/^class PostAdmin(admin.ModelAdmin):$/;"	kind:class	line:5
+QuerySet	../Microlly/tests.py	/^from django.db.models.query import QuerySet$/;"	kind:namespace	line:3
+ROOT_URLCONF	../microblogging/settings.py	/^ROOT_URLCONF = "microblogging.urls"$/;"	kind:variable	line:53
+SECRET_KEY	../microblogging/settings.py	/^SECRET_KEY = "@7fq%ffdkn__rat@rasgt75e#5kz&3xv*8b7froa^!vlyyz2ai"$/;"	kind:variable	line:23
+STATIC_ROOT	../microblogging/settings.py	/^STATIC_ROOT = os.path.join(BASE_DIR, "static")$/;"	kind:variable	line:115
+STATIC_URL	../microblogging/settings.py	/^STATIC_URL = "\/static\/"$/;"	kind:variable	line:114
+TEMPLATES	../microblogging/settings.py	/^TEMPLATES = [$/;"	kind:variable	line:55
+TIME_ZONE	../microblogging/settings.py	/^TIME_ZONE = "Europe\/Paris"$/;"	kind:variable	line:101
+TestCase	../Microlly/tests.py	/^from django.test import TestCase$/;"	kind:namespace	line:1
+USE_I18N	../microblogging/settings.py	/^USE_I18N = True$/;"	kind:variable	line:104
+USE_L10N	../microblogging/settings.py	/^USE_L10N = True$/;"	kind:variable	line:106
+USE_TZ	../microblogging/settings.py	/^USE_TZ = True$/;"	kind:variable	line:108
+User	../Microlly/models.py	/^from django.contrib.auth.models import User$/;"	kind:namespace	line:2
+User	../Microlly/views.py	/^from django.contrib.auth.models import User$/;"	kind:namespace	line:3
+WSGI_APPLICATION	../microblogging/settings.py	/^WSGI_APPLICATION = "microblogging.wsgi.application"$/;"	kind:variable	line:71
+WebsiteTestCase	../Microlly/tests.py	/^class WebsiteTestCase(TestCase):$/;"	kind:class	line:7
+__init__.py	../Microlly/__init__.py	1;"	kind:file	line:1
+__init__.py	../Microlly/migrations/__init__.py	1;"	kind:file	line:1
+__init__.py	../microblogging/__init__.py	1;"	kind:file	line:1
+__str__	../Microlly/models.py	/^    def __str__(self):$/;"	kind:member	line:11
+admin	../Microlly/admin.py	/^from django.contrib import admin$/;"	kind:namespace	line:1
+admin	../microblogging/urls.py	/^from django.contrib import admin$/;"	kind:namespace	line:17
+admin.py	../Microlly/admin.py	1;"	kind:file	line:1
+app_name	../Microlly/urls.py	/^app_name = "Microlly"$/;"	kind:variable	line:4
+application	../microblogging/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:16
+apps.py	../Microlly/apps.py	1;"	kind:file	line:1
+body	../Microlly/models.py	/^    body = models.TextField()$/;"	kind:variable	line:7
+creation_date	../Microlly/models.py	/^    creation_date = models.DateField(auto_now_add=True)$/;"	kind:variable	line:8
+date_hierarchy	../Microlly/admin.py	/^    date_hierarchy = "creation_date"$/;"	kind:variable	line:7
+dependencies	../Microlly/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:10
+execute_from_command_line	../manage.py	/^        from django.core.management import execute_from_command_line$/;"	kind:namespace	line:8
+fields	../Microlly/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:16
+fixtures	../Microlly/tests.py	/^    fixtures = ["initial.json"]$/;"	kind:variable	line:8
+get_wsgi_application	../microblogging/wsgi.py	/^from django.core.wsgi import get_wsgi_application$/;"	kind:namespace	line:12
+include	../Microlly/urls.py	/^from django.urls import path, include$/;"	kind:namespace	line:1
+include	../microblogging/urls.py	/^from django.urls import path, include$/;"	kind:namespace	line:16
+index	../Microlly/views.py	/^def index(request):$/;"	kind:function	line:5
+initial	../Microlly/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:8
+list_display	../Microlly/admin.py	/^    list_display = ("title", "creation_date", "update_date")$/;"	kind:variable	line:6
+manage.py	../manage.py	1;"	kind:file	line:1
+migrations	../Microlly/migrations/0001_initial.py	/^from django.db import migrations, models$/;"	kind:namespace	line:3
+models	../Microlly/migrations/0001_initial.py	/^from django.db import migrations, models$/;"	kind:namespace	line:3
+models	../Microlly/models.py	/^from django.db import models$/;"	kind:namespace	line:1
+models.py	../Microlly/models.py	1;"	kind:file	line:1
+name	../Microlly/apps.py	/^    name = 'Microlly'$/;"	kind:variable	line:5
+name	../Microlly/migrations/0001_initial.py	/^            name='Post',$/;"	kind:variable	line:15
+operations	../Microlly/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:13
+options	../Microlly/migrations/0001_initial.py	/^            options={$/;"	kind:variable	line:23
+os	../manage.py	/^import os$/;"	kind:namespace	line:2
+os	../microblogging/settings.py	/^import os$/;"	kind:namespace	line:13
+os	../microblogging/wsgi.py	/^import os$/;"	kind:namespace	line:10
+path	../Microlly/urls.py	/^from django.urls import path, include$/;"	kind:namespace	line:1
+path	../microblogging/urls.py	/^from django.urls import path, include$/;"	kind:namespace	line:16
+render	../Microlly/views.py	/^from django.shortcuts import render$/;"	kind:namespace	line:1
+reverse	../Microlly/tests.py	/^from django.urls import reverse$/;"	kind:namespace	line:2
+search_fields	../Microlly/admin.py	/^    search_fields = ("title",)$/;"	kind:variable	line:8
+settings	../microblogging/urls.py	/^from django.conf import settings$/;"	kind:namespace	line:18
+settings.py	../microblogging/settings.py	1;"	kind:file	line:1
+static	../microblogging/urls.py	/^from django.conf.urls.static import static$/;"	kind:namespace	line:19
+sys	../manage.py	/^import sys$/;"	kind:namespace	line:3
+test_index_page	../Microlly/tests.py	/^    def test_index_page(self):$/;"	kind:member	line:10
+test_login_page	../Microlly/tests.py	/^    def test_login_page(self):$/;"	kind:member	line:17
+test_signup_page	../Microlly/tests.py	/^    def test_signup_page(self):$/;"	kind:member	line:23
+tests.py	../Microlly/tests.py	1;"	kind:file	line:1
+title	../Microlly/models.py	/^    title = models.CharField(max_length=150)$/;"	kind:variable	line:6
+update_date	../Microlly/models.py	/^    update_date = models.DateField(auto_now=True)$/;"	kind:variable	line:9
+urlpatterns	../Microlly/urls.py	/^urlpatterns = [$/;"	kind:variable	line:7
+urlpatterns	../microblogging/urls.py	/^urlpatterns = [path("admin\/", admin.site.urls), path("", include("Microlly.urls"))]$/;"	kind:variable	line:22
+urls.py	../Microlly/urls.py	1;"	kind:file	line:1
+urls.py	../microblogging/urls.py	1;"	kind:file	line:1
+verbose_name	../Microlly/models.py	/^        verbose_name = "Publication"$/;"	kind:variable	line:15
+verbose_name_plural	../Microlly/models.py	/^        verbose_name_plural = "Publications"$/;"	kind:variable	line:16
+views	../Microlly/urls.py	/^from Microlly import views$/;"	kind:namespace	line:2
+views.py	../Microlly/views.py	1;"	kind:file	line:1
+wsgi.py	../microblogging/wsgi.py	1;"	kind:file	line:1

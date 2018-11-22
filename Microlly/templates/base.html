@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static '/base.css' %}">
+    <link href="{% static 'base.css' %}" rel="stylesheet" type="text/css">
 </head>
 <header>
     <section class="hero is-primary">
@@ -27,21 +27,23 @@
 </header>
 
 <body>
-    <section class="section">
-        <div class="container">
-            {% block body %}
-
-            {% endblock body %}
-        </div>
-    </section>
+    <main>
+        <section class="section wrapper">
+            <div class="container">
+                {% block body %}
+    
+                {% endblock body %}
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Microlly</strong> by <a href="https://simondormeau.fr">Simon Dormeau</a> and Lucille Tyrakowski. The source code is licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+          is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+        </p>
+      </div>
+    </footer>
 </body>
-<footer class="footer">
-  <div class="content has-text-centered">
-    <p>
-      <strong>Microlly</strong> by <a href="https://jgthms.com">Simon Dormeau and Lucille Tyrakowski</a>. The source code is licensed
-      <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-    </p>
-  </div>
-</footer>
 </html>

@@ -1,6 +1,10 @@
-.fix-footer {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    overflow:hidden;
-}
+/* sticky footer */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  main{
+    flex: 1;
+    transition: all 1s ease-out;
+  }

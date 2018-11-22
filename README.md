@@ -4,6 +4,7 @@
 
 Author :
     Simon Dormeau
+    Lucille Tyrakowski
 
 This project is (proudly ?) made in french.
 
@@ -13,6 +14,8 @@ The concept is simple, a **public blog** where anybody can register and write so
 - The practice of Test Driven Development is implemented through *Django* and tests are run by *TravisCI*.
 
 - Users are implemented through Django's Users while Posts are made by hand.
+
+- We use Bulma as css framework.
 
 | Constraints |
 |---------------------------------------------------------------------------------------------------------------------|
