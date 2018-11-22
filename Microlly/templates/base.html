@@ -1,19 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+    <title>Microlly</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  </head>
-  <body>
-  <section class="section">
-    <div class="container">
-        {% block body %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static '/base.css' %}">
+</head>
+<header>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Microlly
+                </h1>
+                <h2 class="subtitle">
+                    Bienvenue
+                </h2>
+            </div>
+        </div>
+    </section>
 
-        {% endblock body %}   
-    </div>
-  </section>
-  </body>
+</header>
+
+<body>
+    <section class="section">
+        <div class="container">
+            {% block body %}
+
+            {% endblock body %}
+        </div>
+    </section>
+</body>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Microlly</strong> by <a href="https://jgthms.com">Simon Dormeau and Lucille Tyrakowski</a>. The source code is licensed
+      <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
+      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
+    </p>
+  </div>
+</footer>
 </html>
