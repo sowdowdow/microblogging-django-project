@@ -11,6 +11,9 @@ def signup(request):
     if request.method != 'POST':
         return render(request, 'registration/signup.html', {'form': forms.SignupForm})
     else:
-        posts = request.post()
+        posts = request.POST
         if posts:
-            return render(request, 'registration/signup.html', {'posts': posts})
+            return render(request, 'registration/signup.html', {'form': forms.SignupForm, 'posts': posts})
+            # TODO :
+            # add tests for datas + implement user saving
+            # https://docs.djangoproject.com/en/2.1/ref/contrib/auth/
