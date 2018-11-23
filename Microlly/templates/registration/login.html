@@ -3,15 +3,10 @@
 {% block body %}
 <h1>Connexion</h1>
 <form method="post" action="{% url 'Microlly:login' %}">
-    {% csrf_token %}
-    {{ form.username.label_tag }}
-    {{ form.username }}
-    {{ form.password.label_tag }}
-    {{ form.password }}
+    {% include "form_snippet.html" %}
     <input type="submit" value="Se connecter">
-    {{ form.errors }}
 </form>
 <p>
-    <a href="{% url 'Microlly:signup' %}">Créer un compte</a>
+    Pas encore de compte ? <a href="{% url 'Microlly:signup' %}">Créez-en un !</a>
 </p>
 {% endblock body %}

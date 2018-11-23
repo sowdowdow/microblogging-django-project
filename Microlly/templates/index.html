@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
 <h1>Liste des dernières publications</h1>
-        <a href="{% url 'Microlly:login' %}">Login</a>
         <ul>
             {% for post in posts %}
                 <li>{{ post.title }}</li>
