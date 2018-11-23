@@ -8,10 +8,10 @@
     {{ form.username }}
     {{ form.password.label_tag }}
     {{ form.password }}
-    <input type="submit" value="S'inscrire">
+    <input type="submit" value="Se connecter">
     {{ form.errors }}
 </form>
 <p>
-    {# <a href="{% url 'Microlly:register' %}">Créer un compte</a> #}
+    <a href="{% url 'Microlly:signup' %}">Créer un compte</a>
 </p>
 {% endblock body %}

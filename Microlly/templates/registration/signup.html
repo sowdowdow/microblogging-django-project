@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h1>Créer un compte</h1>
+    <form method="post" action="{% url 'Microlly:signup' %}">
+        {% csrf_token %}
+        <label for="username">Pseudo</label>
+        <input type="text" name="username">
+        <label for="password1">Mot de passe</label>
+        <input type="text" name="password1">
+        <label for="password2">Confiramtion du Mot de passe</label>
+        <input type="text" name="password2">
+        <input type="submit" value="S'inscrire">
+        {{ form.errors }}
+    </form>
+{% endblock %}
