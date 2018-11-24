@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.urls import reverse
 from django.db.models.query import QuerySet
 from Microlly.models import Post
@@ -19,6 +19,7 @@ class WebsiteTestCase(TestCase):
         self.assertContains(response, "Connexion")
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "registration/login.html")
+        # response = self.client.post(reverse("Microlly:login"), {'username': 'john', 'password': 'vivelafrance'}) # TODO
     
     def test_signup_page(self):
         response = self.client.get(reverse("Microlly:signup"))
