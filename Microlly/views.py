@@ -1,35 +1,59 @@
-from django.shortcuts import render, redirect
-from Microlly.models import Post
-from Microlly import forms
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
+from django.views.generic.edit import CreateView
+
+from Microlly import forms
+from Microlly.models import Post
+
 
 def index(request):
     posts = Post.objects.all()
-    return render(request, 'index.html', {'posts': posts})
+    return render(request, "index.html", {"posts": posts})
+
 
 def login(request):
-    username = request.POST['username']
-    password = request.POST['password']
+    username = request.POST["username"]
+    password = request.POST["password"]
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        redirect('Microlly:account')
+        redirect("Microlly:account")
     else:
-        redirect('Microlly:login')
+        redirect("Microlly:login")
+
 
 def signup(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('Microlly:login')
+            return redirect("Microlly:login")
     else:
         form = UserCreationForm()
-    return render(request, 'registration/signup.html', {'form': form})
+    return render(request, "registration/signup.html", {"form": form})
+
 
 @login_required
 def account(request):
-    return render(request, 'account.html')
+    user_posts = Post.objects.filter(author=request.user).all()
+    return render(request, "account.html", {"user_posts": user_posts})
+
+
+@login_required
+def createPost(request):
+    if request.method == "POST":
+        form = forms.PostCreateForm(request.POST or None)
+        if form.is_valid():
+            # not saved in DB
+            new_post = form.save(commit=False)
+            new_post.author = request.user
+            new_post.save()
+            return redirect("Microlly:account")
+        else:
+            return render(request, "create_post.html", {"form": form})
+    else:
+        form = forms.PostCreateForm()
+        return render(request, "create_post.html", {"form": form})

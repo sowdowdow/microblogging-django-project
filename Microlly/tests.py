@@ -40,3 +40,10 @@ class WebsiteTestCase(TestCase):
         response = self.client.get(reverse("Microlly:account"))
         self.failUnlessEqual(response.status_code, 302)
 
+    def test_create_post_page(self):
+        self.client.force_login(
+            User.objects.create_user(username="temporary", password="temporary")
+        )
+        response = self.client.get(reverse("Microlly:create_post"))
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "create_post.html")

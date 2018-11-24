@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1>Écrire un article :</h1>
+<form method="post" action="{% url 'Microlly:create_post' %}">
+    {% include "form_snippet.html" %}
+    <input type="submit" value="Publier">
+</form>
+{% endblock body %}

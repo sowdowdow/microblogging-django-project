@@ -1,4 +1,25 @@
 {% extends 'base.html' %}
 {% block body %}
 <h1>Bienvenue sur votre compte</h1>
+<a href="{% url 'Microlly:create_post' %}">écrire un article
+        <span class="icon has-text-success">
+            <i class="fas fa-plus"></i>
+        </span>
+</a>
+<h2>Mes publications :</h2>
+{% for post in user_posts %}
+<article>
+    <span>{{ post.title }}</span>
+    <a href="">
+        <span class="icon has-text-danger">
+            <i class="fas fa-trash"></i>
+        </span>
+    </a>
+    <a href="">
+        <span class="icon has-text-warning">
+            <i class="fas fa-edit"></i>
+        </span>
+    </a>
+</article>
+{% endfor %}
 {% endblock body %}
