@@ -1,6 +1,9 @@
 # MicroBlogging Project - Open Source
 
 [![Build Status](https://travis-ci.org/sowdowdow/microblogging-django-project.svg?branch=master)](https://travis-ci.org/sowdowdow/microblogging-django-project)
+[![Python Version](https://img.shields.io/badge/python-3.6.7-brightgreen.svg)](https://python.org)
+[![Django Version](https://img.shields.io/badge/django-2.1.3-brightgreen.svg)](https://djangoproject.com)
+
 
 Author :
     Simon Dormeau
