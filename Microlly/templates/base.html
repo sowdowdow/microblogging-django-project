@@ -2,19 +2,20 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Microlly</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    {% load static %}
-    <link href="{% static 'base.css' %}" rel="stylesheet" type="text/css">
+{% include "head.html" %}
 </head>
 <header>
     <section class="hero is-primary">
         <div class="hero-body">
             <div class="container">
-                <a href="{% url 'Microlly:login' %}" class="is-pulled-right">Se connecter / Créer un compte</a>
+                {% if user.is_authenticated %}
+                    <div class="is-pulled-right">Connecté en temps que <i>{{ user.username }}</i>,
+                        <a href="{% url 'Microlly:logout' %}">Déconnexion 🚪</a>
+                    </div>
+                    
+                {% else %}
+                    <a href="{% url 'Microlly:login' %}" class="is-pulled-right">Se connecter</a>
+                {% endif %}
                 <h1 class="title" clas="is-overlay">
                     <a href="{% url 'Microlly:index' %}">Microlly</a> 
                 </h1>
