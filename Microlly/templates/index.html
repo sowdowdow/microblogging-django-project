@@ -4,9 +4,14 @@
         <a href="{% url 'Microlly:account' %}" class="is-pulled-right">Mon compte</a>
     {% endif %}
     <h1>Liste des dernières publications</h1>
-    <ul>
+    <div>
         {% for post in posts %}
-            <li>{{ post.title }}</li>
+            <div class="box">
+            <a href=""><h3 class="title">{{ post.title }}</h3></a>
+            <div>Le {{ post.creation_date }}</div>
+            <span>Auteur : <a href="">{{ post.author }}</a></span>
+            <p>{{ post.body }}</p>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 {% endblock body %}
