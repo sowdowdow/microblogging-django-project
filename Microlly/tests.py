@@ -51,3 +51,15 @@ class WebsiteTestCase(TestCase):
         self.client.logout()
         response = self.client.get(reverse("Microlly:create_post"))
         self.failUnlessEqual(response.status_code, 302)
+
+    def test_delete_post_page(self):
+        self.client.force_login(
+            User.objects.create_user(username="temporary", password="temporary")
+        )
+        response = self.client.get(reverse("Microlly:delete_post"))
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "delete_post.html")
+        # logged out test
+        self.client.logout()
+        response = self.client.get(reverse("Microlly:delete_post"))
+        self.failUnlessEqual(response.status_code, 302)
