@@ -47,3 +47,7 @@ class WebsiteTestCase(TestCase):
         response = self.client.get(reverse("Microlly:create_post"))
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "create_post.html")
+        # logged out test
+        self.client.logout()
+        response = self.client.get(reverse("Microlly:create_post"))
+        self.failUnlessEqual(response.status_code, 302)
