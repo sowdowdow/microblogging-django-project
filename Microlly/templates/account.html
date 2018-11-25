@@ -8,9 +8,9 @@
 </a>
 <h2>Mes publications :</h2>
 {% for post in user_posts %}
-<article>
+<article class="box">
     <span>{{ post.title }}</span>
-    <a href="">
+    <a href="{% url 'Microlly:delete_post' id=post.id %}">
         <span class="icon has-text-danger">
             <i class="fas fa-trash"></i>
         </span>

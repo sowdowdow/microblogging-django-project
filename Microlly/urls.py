@@ -10,4 +10,5 @@ urlpatterns = [
     path('account/', views.account, name="account"),
     path('accounts/signup/', views.signup, name='signup'),
     path('create-post/', views.createPost, name="create_post"),
+    path('delete-post/<int:id>/', views.deletePost, name="delete_post"),
 ]

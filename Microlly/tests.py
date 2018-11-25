@@ -53,13 +53,31 @@ class WebsiteTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 302)
 
     def test_delete_post_page(self):
-        self.client.force_login(
-            User.objects.create_user(username="temporary", password="temporary")
+        tmp_user = User.objects.create_user(username="temporary", password="temporary")
+        self.client.force_login(tmp_user)
+        tmp_post = Post.objects.create(
+            title="temporary", body="temporary", author=tmp_user
         )
-        response = self.client.get(reverse("Microlly:delete_post"))
+        response = self.client.get(
+            reverse("Microlly:delete_post", kwargs={"id": tmp_post.id})
+        )
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "delete_post.html")
         # logged out test
         self.client.logout()
-        response = self.client.get(reverse("Microlly:delete_post"))
+        response = self.client.get(
+            reverse("Microlly:delete_post", kwargs={"id": tmp_post.id})
+        )
         self.failUnlessEqual(response.status_code, 302)
+
+    def test_delete_post_done_page(self):
+        tmp_user = User.objects.create_user(username="temporary", password="temporary")
+        self.client.force_login(tmp_user)
+        tmp_post = Post.objects.create(
+            title="temporary", body="temporary", author=tmp_user
+        )
+        response = self.client.post(
+            reverse("Microlly:delete_post", kwargs={"id": tmp_post.id})
+        )
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "delete_post_done.html")

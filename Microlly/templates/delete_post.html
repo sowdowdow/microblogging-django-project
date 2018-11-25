@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h1>Voulez-vous vraiment supprimer le post suivant :</h1>
+    <div>
+        <i>{{ post }}</i> datant du {{ post.creation_date }}
+        <form method="post" action="{% url 'Microlly:delete_post' id=id%}">
+            {% csrf_token %}
+            <input type="submit" name="submit" value="Confirmer la suppression">
+        </form>
+    </div>
+{% endblock body %}

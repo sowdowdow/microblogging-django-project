@@ -57,3 +57,18 @@ def createPost(request):
     else:
         form = forms.PostCreateForm()
         return render(request, "create_post.html", {"form": form})
+
+
+@login_required
+def deletePost(request, id):
+    post = Post.objects.get(pk=id)
+    print(post)
+    if request.method == "POST":
+        # suppress confirmed by user
+        if post.author == request.user:
+            post.delete()
+            return render(request, "delete_post_done.html", {"post": post})
+        else:
+            redirect("Microlly:index")
+    else:
+        return render(request, "delete_post.html", {"id": id, "post": post})
