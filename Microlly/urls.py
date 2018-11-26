@@ -13,4 +13,5 @@ urlpatterns = [
     path('create-post/', views.createPost, name="create_post"),
     path('edit-post/<int:id>/', views.editPost, name="edit_post"),
     path('delete-post/<int:id>/', views.deletePost, name="delete_post"),
+    path('<slug:author>/posts/', views.authorPosts, name="author_posts"),
 ]

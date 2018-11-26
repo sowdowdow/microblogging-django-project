@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 {% block body %}
-    <h1>Liste des dernières publications</h1>
+    <h1>Les publications de <b>{{ author }}</b> : </h1>
     <div>
         {% for post in posts %}
             <div class="box">
             <a href="{% url 'Microlly:post' id=post.id %}"><h3 class="title">{{ post.title }}</h3></a>
             <div>Le {{ post.creation_date }}</div>
-            <span>Auteur : <a href="{% url 'Microlly:author_posts' author=post.author %}">{{ post.author }}</a></span>
             <p>{{ post.body }}</p>
             </div>
         {% endfor %}

@@ -125,11 +125,18 @@ class WebsiteTestCase(TestCase):
             reverse("Microlly:edit_post", kwargs={"id": tmp_post.id})
         )
         self.failUnlessEqual(response.status_code, 302)
-    
+
     def test_author_posts_page(self):
-        user = User.objects.first()
-        response = self.client.get(reverse("Microlly:author_posts", kwargs={"auhtor":user}))
-        self.assertContains(response, "Les publications de " + user)
-        self.assertEqual(type(response.context["posts"]), QuerySet)
+        tmp_user = User.objects.create_user(username="temporary", password="temporary")
+        tmp_post = Post.objects.create(
+            title="temporary", body="temporary", author=tmp_user
+        )
+        response = self.client.get(
+            reverse("Microlly:author_posts", kwargs={"author": tmp_user})
+        )
+        self.assertContains(
+            response, "Les publications de <b>" + str(tmp_user) + "</b>"
+        )
+        self.assertEqual(type(response.context["posts"]), list)
+        self.assertTemplateUsed(response, "author_posts.html")
         self.failUnlessEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "index.html")

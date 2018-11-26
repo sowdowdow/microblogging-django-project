@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, get_list_or_404, redirect, render
 from django.views.defaults import page_not_found
 from django.views.generic.edit import CreateView
 
@@ -88,10 +88,10 @@ def deletePost(request, id):
 @login_required
 def editPost(request, id):
     post = get_object_or_404(Post, pk=id)
+    if post.author != request.user:
+        raise PermissionDenied
     if request.method == "POST":
         # check if is author of the post
-        if post.author != request.user:
-            raise PermissionDenied
         form = forms.PostCreateForm(request.POST or None)
         if form.is_valid():
             post.title = form.cleaned_data['title']
@@ -103,3 +103,8 @@ def editPost(request, id):
 
     form = forms.PostEditForm(instance=post)
     return render(request, "edit_post.html", {"form": form})
+
+def authorPosts(request, author):
+    author = get_object_or_404(User, username=author)
+    posts = get_list_or_404(Post, author=author)
+    return render(request, "author_posts.html", {"posts": posts, "author": author})
