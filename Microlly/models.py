@@ -14,6 +14,6 @@ class Post(models.Model):
         return self.title
 
     class Meta:
-        ordering = ("-creation_date",)
+        ordering = ("-id",)
         verbose_name = "Publication"
         verbose_name_plural = "Publications"
