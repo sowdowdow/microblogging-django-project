@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
 {% block body %}
-    {% if user.is_authenticated %}
-        <a href="{% url 'Microlly:account' %}" class="is-pulled-right">Mon compte</a>
-    {% endif %}
     <h1>Liste des dernières publications</h1>
     <div>
         {% for post in posts %}
             <div class="box">
-            <a href=""><h3 class="title">{{ post.title }}</h3></a>
+            <a href="{% url 'Microlly:post' id=post.id %}"><h3 class="title">{{ post.title }}</h3></a>
             <div>Le {{ post.creation_date }}</div>
             <span>Auteur : <a href="">{{ post.author }}</a></span>
             <p>{{ post.body }}</p>

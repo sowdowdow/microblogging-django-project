@@ -48,7 +48,8 @@ def signup(request):
 @login_required
 def account(request):
     user_posts = Post.objects.filter(author=request.user).all()
-    return render(request, "account.html", {"user_posts": user_posts})
+    isaccountview = True
+    return render(request, "account.html", {"user_posts": user_posts, "isaccountview": isaccountview})
 
 
 @login_required

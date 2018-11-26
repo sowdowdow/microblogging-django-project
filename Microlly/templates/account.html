@@ -9,7 +9,7 @@
     <h2>Mes publications :</h2>
     {% for post in user_posts %}
         <article class="box">
-            <span>{{ post.title }}, créé le : {{ post.creation_date }}, édité le : {{ post.update_date }}</span>
+            <span><a href="{% url 'Microlly:post' id=post.id %}">{{ post.title }}</a>, créé le : {{ post.creation_date }}, édité le : {{ post.update_date }}</span>
 
             <a href="{% url 'Microlly:delete_post' id=post.id %}">
                 <span class="icon has-text-danger">
