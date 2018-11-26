@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.paginator import Page
 from django.db.models.query import QuerySet
 from django.test import Client, TestCase
 from django.urls import reverse
@@ -12,7 +13,7 @@ class WebsiteTestCase(TestCase):
     def test_index_page(self):
         response = self.client.get(reverse("Microlly:index"))
         self.assertContains(response, "Liste des dernières publications")
-        self.assertEqual(type(response.context["posts"]), QuerySet)
+        self.assertEqual(type(response.context["posts"]), Page)
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "index.html")
 

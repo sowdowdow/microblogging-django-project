@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import get_object_or_404, get_list_or_404, redirect, render
+from django.core.paginator import Paginator
+from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
 from django.views.defaults import page_not_found
 from django.views.generic.edit import CreateView
 
@@ -12,7 +13,13 @@ from Microlly.models import Post
 
 
 def index(request):
+    try:
+        page = int(request.GET.get("page"))
+    except:
+        page = 1
     posts = Post.objects.all()
+    paginator = Paginator(posts, 5)
+    posts = paginator.page(page)
     return render(request, "index.html", {"posts": posts})
 
 
@@ -94,8 +101,8 @@ def editPost(request, id):
         # check if is author of the post
         form = forms.PostCreateForm(request.POST or None)
         if form.is_valid():
-            post.title = form.cleaned_data['title']
-            post.body = form.cleaned_data['body']
+            post.title = form.cleaned_data["title"]
+            post.body = form.cleaned_data["body"]
             post.save()
             return redirect("Microlly:account")
         else:
@@ -103,6 +110,7 @@ def editPost(request, id):
 
     form = forms.PostEditForm(instance=post)
     return render(request, "edit_post.html", {"form": form})
+
 
 def authorPosts(request, author):
     author = get_object_or_404(User, username=author)
