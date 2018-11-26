@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+    {% if user.is_authenticated %}
+        <a href="{% url 'Microlly:account' %}" class="is-pulled-right">Mon compte</a>
+    {% endif %}
+    <h1>Oops !</h1>
+    <div>
+        La page que vous cherchez est introuvable !
+    </div>
+{% endblock body %}

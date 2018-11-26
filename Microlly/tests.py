@@ -85,13 +85,19 @@ class WebsiteTestCase(TestCase):
     def test_post_page(self):
         # Specific post page
         tmp_user = User.objects.create_user(username="temporary", password="temporary")
-        self.client.force_login(tmp_user)
         tmp_post = Post.objects.create(
             title="temporary", body="temporary", author=tmp_user
         )
         response = self.client.get(reverse("Microlly:post", kwargs={"id": tmp_post.id}))
-        self.assertContains(response, tmp_post.name)
-        self.assertEqual(type(response.context["Post"]), tmp_post)
+        self.assertContains(response, tmp_post.title)
+        self.assertContains(response, tmp_post.body)
+        self.assertEqual(type(response.context["post"]), Post)
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed("post.html")
+        impossible_id = User.objects.last().id + 1
+        response = self.client.get(
+            reverse("Microlly:post", kwargs={"id": impossible_id})
+        )
+        self.failUnlessEqual(response.status_code, 404)
+        self.assertTemplateUsed("404.html")
 

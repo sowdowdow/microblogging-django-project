@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.views.generic.edit import CreateView
+from django.views.defaults import page_not_found
 
 from Microlly import forms
 from Microlly.models import Post
@@ -12,6 +13,14 @@ from Microlly.models import Post
 def index(request):
     posts = Post.objects.all()
     return render(request, "index.html", {"posts": posts})
+
+
+def post(request, id):
+    try:
+        post = Post.objects.get(pk=id)
+    except Post.DoesNotExist as notFound:
+        return page_not_found(request, notFound, template_name="404.html")
+    return render(request, "post.html", {"post": post})
 
 
 def login(request):
