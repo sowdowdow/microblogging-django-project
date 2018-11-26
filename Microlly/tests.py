@@ -101,3 +101,27 @@ class WebsiteTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 404)
         self.assertTemplateUsed("404.html")
 
+    def test_edit_page(self):
+        tmp_user = User.objects.create_user(username="temporary", password="temporary")
+        tmp_post = Post.objects.create(
+            title="temporary", body="temporary", author=tmp_user
+        )
+        self.client.force_login(tmp_user)
+        response = self.client.get(
+            reverse("Microlly:edit_post", kwargs={"id": tmp_post.id})
+        )
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "edit_post.html")
+        # impossible edit test
+        impossible_id = User.objects.last().id + 1
+        response = self.client.get(
+            reverse("Microlly:post", kwargs={"id": impossible_id})
+        )
+        self.failUnlessEqual(response.status_code, 404)
+        self.assertTemplateUsed("404.html")
+        # logged out test
+        self.client.logout()
+        response = self.client.get(
+            reverse("Microlly:edit_post", kwargs={"id": tmp_post.id})
+        )
+        self.failUnlessEqual(response.status_code, 302)
