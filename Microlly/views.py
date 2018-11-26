@@ -2,9 +2,10 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, render
-from django.views.generic.edit import CreateView
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.defaults import page_not_found
+from django.views.generic.edit import CreateView
 
 from Microlly import forms
 from Microlly.models import Post
@@ -16,10 +17,7 @@ def index(request):
 
 
 def post(request, id):
-    try:
-        post = Post.objects.get(pk=id)
-    except Post.DoesNotExist as notFound:
-        return page_not_found(request, notFound, template_name="404.html")
+    post = get_object_or_404(Post, pk=id)
     return render(request, "post.html", {"post": post})
 
 
@@ -49,7 +47,11 @@ def signup(request):
 def account(request):
     user_posts = Post.objects.filter(author=request.user).all()
     isaccountview = True
-    return render(request, "account.html", {"user_posts": user_posts, "isaccountview": isaccountview})
+    return render(
+        request,
+        "account.html",
+        {"user_posts": user_posts, "isaccountview": isaccountview},
+    )
 
 
 @login_required
@@ -71,8 +73,7 @@ def createPost(request):
 
 @login_required
 def deletePost(request, id):
-    post = Post.objects.get(pk=id)
-    print(post)
+    post = get_object_or_404(Post, pk=id)
     if request.method == "POST":
         # suppress confirmed by user
         if post.author == request.user:
@@ -82,3 +83,23 @@ def deletePost(request, id):
             redirect("Microlly:index")
     else:
         return render(request, "delete_post.html", {"id": id, "post": post})
+
+
+@login_required
+def editPost(request, id):
+    post = get_object_or_404(Post, pk=id)
+    if request.method == "POST":
+        # check if is author of the post
+        if post.author != request.user:
+            raise PermissionDenied
+        form = forms.PostCreateForm(request.POST or None)
+        if form.is_valid():
+            post.title = form.cleaned_data['title']
+            post.body = form.cleaned_data['body']
+            post.save()
+            return redirect("Microlly:account")
+        else:
+            return render(request, "create_post.html", {"form": form})
+
+    form = forms.PostEditForm(instance=post)
+    return render(request, "edit_post.html", {"form": form})

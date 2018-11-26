@@ -8,3 +8,12 @@ class PostCreateForm(forms.ModelForm):
             'title',
             'body',
         ]
+
+class PostEditForm(forms.ModelForm):
+    class Meta:
+        model = models.Post
+        fields = [
+            'id',
+            'title',
+            'body',
+        ]
