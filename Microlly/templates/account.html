@@ -1,25 +1,28 @@
 {% extends 'base.html' %}
 {% block body %}
-<h1>Bienvenue sur votre compte</h1>
-<a href="{% url 'Microlly:create_post' %}">écrire un article
+    <h1>Bienvenue sur votre compte</h1>
+    <a href="{% url 'Microlly:create_post' %}">écrire un article
         <span class="icon has-text-success">
             <i class="fas fa-plus"></i>
         </span>
-</a>
-<h2>Mes publications :</h2>
-{% for post in user_posts %}
-<article class="box">
-    <span>{{ post.title }}</span>
-    <a href="{% url 'Microlly:delete_post' id=post.id %}">
-        <span class="icon has-text-danger">
-            <i class="fas fa-trash"></i>
-        </span>
     </a>
-    <a href="">
-        <span class="icon has-text-warning">
-            <i class="fas fa-edit"></i>
-        </span>
-    </a>
-</article>
-{% endfor %}
+    <h2>Mes publications :</h2>
+    {% for post in user_posts %}
+        <article class="box">
+            <span>{{ post.title }}, créé le : {{ post.creation_date }}, édité le : {{ post.update_date }}</span>
+
+            <a href="{% url 'Microlly:delete_post' id=post.id %}">
+                <span class="icon has-text-danger">
+                    <i class="fas fa-trash"></i>
+                </span>
+            </a>
+            <a href="">
+                <span class="icon has-text-warning">
+                    <i class="fas fa-edit"></i>
+                </span>
+            </a>
+        </article>
+    {% empty %}
+        <div class="box">Vous n'avez rien rédigé pour le moment.</div>
+    {% endfor %}
 {% endblock body %}
