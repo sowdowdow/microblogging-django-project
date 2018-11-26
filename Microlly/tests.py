@@ -138,6 +138,6 @@ class WebsiteTestCase(TestCase):
         self.assertContains(
             response, "Les publications de <b>" + str(tmp_user) + "</b>"
         )
-        self.assertEqual(type(response.context["posts"]), list)
+        self.assertEqual(type(response.context["posts"]), Page)
         self.assertTemplateUsed(response, "author_posts.html")
         self.failUnlessEqual(response.status_code, 200)

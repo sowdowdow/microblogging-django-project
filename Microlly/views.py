@@ -113,6 +113,12 @@ def editPost(request, id):
 
 
 def authorPosts(request, author):
+    try:
+        page = int(request.GET.get("page"))
+    except:
+        page = 1
     author = get_object_or_404(User, username=author)
     posts = get_list_or_404(Post, author=author)
+    paginator = Paginator(posts, 5)
+    posts = paginator.page(page)
     return render(request, "author_posts.html", {"posts": posts, "author": author})
