@@ -7,22 +7,42 @@
         </span>
     </a>
     <h2>Mes publications :</h2>
-    {% for post in user_posts %}
-        <article class="box">
-            <span><a href="{% url 'Microlly:post' id=post.id %}">{{ post.title }}</a>, créé le : {{ post.creation_date }}, édité le : {{ post.update_date }}</span>
 
-            <a href="{% url 'Microlly:delete_post' id=post.id %}">
-                <span class="icon has-text-danger">
-                    <i class="fas fa-trash"></i>
-                </span>
-            </a>
-            <a href="">
-                <span class="icon has-text-warning">
-                    <i class="fas fa-edit"></i>
-                </span>
-            </a>
-        </article>
-    {% empty %}
-        <div class="box">Vous n'avez rien rédigé pour le moment.</div>
-    {% endfor %}
+
+    <table class="table is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+            <th><abbr title="Titre">Titre</abbr></th>
+            <th><abbr title="Date de création">Création</abbr></th>
+            <th><abbr title="Date de dernière modification">Modification</abbr></th>
+            <th><abbr title="Modifier l'article">Modifier</abbr></th>
+            <th><abbr title="Supprimer l'article">Supprimer</abbr></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in user_posts %}
+                <tr>
+                    <td><a href="{% url 'Microlly:post' id=post.id %}">{{ post.title }}</a></td>
+                    <td>{{ post.creation_date }}</td>
+                    <td>{{ post.update_date }}</td>
+                    <td>
+                        <a href="{% url 'Microlly:delete_post' id=post.id %}">
+                            <span class="icon has-text-danger">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="">
+                            <span class="icon has-text-warning">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <div class="box">Vous n'avez rien rédigé pour le moment.</div>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock body %}
