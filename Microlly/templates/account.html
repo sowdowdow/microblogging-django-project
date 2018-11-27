@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 {% block body %}
     <h1>Bienvenue sur votre compte</h1>
-    <a href="{% url 'Microlly:create_post' %}">écrire un article
-        <span class="icon has-text-success">
-            <i class="fas fa-plus"></i>
-        </span>
-    </a>
+    
+    <p class="button is-pulled-right">
+        <a href="{% url 'Microlly:create_post' %}">Rédiger une publication 
+            <span class="icon has-text-success">
+                <i class="fas fa-plus"></i>
+            </span>
+        </a>
+    </p>
+
+    <hr>
+
+    <p>Nombre de publications : <b class="has-text-danger">{{ number_of_user_posts }}</b></p>
+
     <h2>Mes publications :</h2>
 
 
