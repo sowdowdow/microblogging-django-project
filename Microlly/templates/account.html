@@ -1,18 +1,47 @@
 {% extends 'base.html' %}
 {% block body %}
-    <h1>Bienvenue sur votre compte</h1>
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="{% url 'Microlly:index' %}">Accueil</a></li>
+            <li class="is-active"><a href="#" aria-current="page">Mon Compte</a></li>
+        </ul>
+    </nav>
+
+    <nav class="level">
+        <div class="level-item has-text-centered">
+            <div>
+            <p class="heading">Publications</p>
+            <p class="title">{{ number_of_user_posts }}</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+            <p class="heading">Following</p>
+            <p class="title">0</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+            <p class="heading">Followers</p>
+            <p class="title">0</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
+            <p class="heading">Likes</p>
+            <p class="title">0</p>
+            </div>
+        </div>
+    </nav>
     
-    <p class="button is-pulled-right">
-        <a href="{% url 'Microlly:create_post' %}">Rédiger une publication 
-            <span class="icon has-text-success">
-                <i class="fas fa-plus"></i>
+    <section class="section has-text-centered">
+        <a href="{% url 'Microlly:create_post' %}" class="button is-success">
+            <p>Rédiger une publication</p>
+            <span class="icon white-text">
+                <i class="fas fa-edit"></i>
             </span>
         </a>
-    </p>
-
-    <hr>
-
-    <p>Nombre de publications : <b class="has-text-danger">{{ number_of_user_posts }}</b></p>
+    </section>
 
     <h2>Mes publications :</h2>
 
