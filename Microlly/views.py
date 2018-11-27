@@ -8,7 +8,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404, redirect, rende
 from django.views.defaults import page_not_found
 from django.views.generic.edit import CreateView
 
-from Microlly import forms
+from Microlly import forms, ranking
 from Microlly.models import Post
 
 
@@ -54,6 +54,7 @@ def signup(request):
 def account(request):
     user_posts = Post.objects.filter(author=request.user).all()
     number_of_posts = len(user_posts)
+    user_rank = ranking.get_rank(number_of_posts)
     isaccountview = True
     return render(
         request,
@@ -62,6 +63,7 @@ def account(request):
             "user_posts": user_posts,
             "isaccountview": isaccountview,
             "number_of_user_posts": number_of_posts,
+            "rank": user_rank,
         },
     )
 
@@ -92,7 +94,7 @@ def deletePost(request, id):
             post.delete()
             return render(request, "delete_post_done.html", {"post": post})
         else:
-            redirect("Microlly:index")
+            raise PermissionDenied
     else:
         return render(request, "delete_post.html", {"id": id, "post": post})
 
@@ -100,10 +102,11 @@ def deletePost(request, id):
 @login_required
 def editPost(request, id):
     post = get_object_or_404(Post, pk=id)
+    # check if is author of the post
     if post.author != request.user:
         raise PermissionDenied
     if request.method == "POST":
-        # check if is author of the post
+        # post was edited and is saved
         form = forms.PostCreateForm(request.POST or None)
         if form.is_valid():
             post.title = form.cleaned_data["title"]
@@ -112,7 +115,7 @@ def editPost(request, id):
             return redirect("Microlly:account")
         else:
             return render(request, "create_post.html", {"form": form})
-
+    # pre-edition of the post
     form = forms.PostEditForm(instance=post)
     return render(request, "edit_post.html", {"form": form})
 
