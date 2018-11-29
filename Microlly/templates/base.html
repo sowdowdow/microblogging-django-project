@@ -2,22 +2,23 @@
 <html>
 
 <head>
-{% include "head.html" %}
+    {% include "head.html" %}
 </head>
 <header>
-    <section class="hero is-primary">
+    <section class="hero is-link">
         <div class="hero-body">
             <div class="container">
                 {% if user.is_authenticated %}
-                    <div class="is-pulled-right">Connecté en temps que <i>{{ user.username }}</i>,
-                        <a href="{% url 'Microlly:logout' %}">Déconnexion 🚪</a>
-                    </div>
-                    
+                <div class="is-pulled-right">Connecté en temps que
+                    <i>{{ user.username }}</i>,
+                    <a href="{% url 'Microlly:logout' %}">Déconnexion 🚪</a>
+                </div>
+
                 {% else %}
-                    <a href="{% url 'Microlly:login' %}" class="is-pulled-right">Se connecter</a>
+                <a href="{% url 'Microlly:login' %}" class="is-pulled-right">Se connecter</a>
                 {% endif %}
                 <h1 class="title" clas="is-overlay">
-                    <a href="{% url 'Microlly:index' %}">Microlly</a> 
+                    <a href="{% url 'Microlly:index' %}">Microlly</a>
                 </h1>
                 <h2 class="subtitle">
                     Bienvenue
@@ -32,22 +33,26 @@
     <main>
         <section class="section wrapper">
             <div class="container">
-                {% if user.is_authenticated and not isaccountview%}
-                    <a href="{% url 'Microlly:account' %}" class="is-pulled-right">Mon compte</a>
-                {% endif %}
-                {% block body %}
-    
-                {% endblock body %}
+                <div class="columns is-mobile">
+                    <div class="column is-half is-offset-one-quarter">
+                    {% if user.is_authenticated and not isaccountview%}
+                    <a href="{% url 'Microlly:account' %}" class="button is-link is-outlined is-pulled-right">Mon compte</a>
+                    {% endif %} {% block body %} {% endblock body %}
+                    </div>
+                </div>
             </div>
         </section>
     </main>
     <footer class="footer">
-      <div class="content has-text-centered">
-        <p>
-          <strong>Microlly</strong> by <a href="https://simondormeau.fr" target="_blank">Simon Dormeau</a> and <a href="https://www.flickr.com/photos/biayo/3683976815" target="_blank">Lucille Tyrakowski</a>.
-          
-        </p>
-      </div>
+        <div class="content has-text-centered">
+            <p>
+                <strong>Microlly</strong> by
+                <a href="https://simondormeau.fr" target="_blank">Simon Dormeau</a> and
+                <a href="https://www.flickr.com/photos/biayo/3683976815" target="_blank">Lucille Tyrakowski</a>.
+
+            </p>
+        </div>
     </footer>
 </body>
+
 </html>
