@@ -83,47 +83,51 @@ class WebsiteTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "delete_post_done.html")
 
-    def test_post_page(self):
+    def test_post_page_success(self):
         # Specific post page
-        tmp_user = User.objects.create_user(username="temporary", password="temporary")
-        tmp_post = Post.objects.create(
-            title="temporary", body="temporary", author=tmp_user
-        )
+        tmp_user = User.objects.get(username="gerard")
+        tmp_post = Post.objects.filter(author=tmp_user).first()
         response = self.client.get(reverse("Microlly:post", kwargs={"id": tmp_post.id}))
         self.assertContains(response, tmp_post.title)
         self.assertContains(response, tmp_post.body)
         self.assertEqual(type(response.context["post"]), Post)
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed("post.html")
-        impossible_id = User.objects.last().id + 1
+
+
+    def test_post_page_failed(self):
+        # specific invalid post page
         response = self.client.get(
-            reverse("Microlly:post", kwargs={"id": impossible_id})
+            reverse("Microlly:post", kwargs={"id": 99999})
         )
         self.failUnlessEqual(response.status_code, 404)
         self.assertTemplateUsed("404.html")
 
-    def test_edit_page(self):
-        tmp_user = User.objects.create_user(username="temporary", password="temporary")
-        tmp_post = Post.objects.create(
-            title="temporary", body="temporary", author=tmp_user
-        )
-        self.client.force_login(tmp_user)
+    def test_edit_page_success_and_forbidden(self):
+        # test a possible post editing
+        tmp_user = User.objects.get(username="gerard")
+        tmp_post = Post.objects.filter(author=tmp_user).first()
+        self.client.login(username='gerard', password='motdepasse123')
         response = self.client.get(
             reverse("Microlly:edit_post", kwargs={"id": tmp_post.id})
         )
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "edit_post.html")
+
         # impossible edit test
-        impossible_id = User.objects.last().id + 1
+        tmp_user = User.objects.get(username="marie")
+        post_id_not_from_user = Post.objects.filter(author=tmp_user).first().id
         response = self.client.get(
-            reverse("Microlly:post", kwargs={"id": impossible_id})
+            reverse("Microlly:edit_post", kwargs={"id": post_id_not_from_user})
         )
-        self.failUnlessEqual(response.status_code, 404)
-        self.assertTemplateUsed("404.html")
+        self.failUnlessEqual(response.status_code, 403)
+        self.assertTemplateUsed("403.html")
+
+    def test_edit_page_unlogged(self):
         # logged out test
-        self.client.logout()
+        post_id = Post.objects.get(pk=1).id
         response = self.client.get(
-            reverse("Microlly:edit_post", kwargs={"id": tmp_post.id})
+            reverse("Microlly:edit_post", kwargs={"id": post_id})
         )
         self.failUnlessEqual(response.status_code, 302)
 
