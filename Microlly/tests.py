@@ -29,56 +29,53 @@ class WebsiteTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "registration/signup.html")
 
-    def test_account_page(self):
-        self.client.force_login(
-            User.objects.create_user(username="temporary", password="temporary")
-        )
+    def test_account_page_success(self):
+        # logged in test
+        self.client.login(username='gerard', password='motdepasse123')
         response = self.client.get(reverse("Microlly:account"))
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "account.html")
+
+    def test_account_page_failure(self):
         # logged out test
-        self.client.logout()
         response = self.client.get(reverse("Microlly:account"))
         self.failUnlessEqual(response.status_code, 302)
 
-    def test_create_post_page(self):
-        self.client.force_login(
-            User.objects.create_user(username="temporary", password="temporary")
-        )
+
+    def test_create_post_page_success(self):
+        self.client.login(username='gerard', password='motdepasse123')
         response = self.client.get(reverse("Microlly:create_post"))
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "create_post.html")
+    
+    def test_create_post_page_failure(self):
         # logged out test
-        self.client.logout()
         response = self.client.get(reverse("Microlly:create_post"))
         self.failUnlessEqual(response.status_code, 302)
 
-    def test_delete_post_page(self):
-        tmp_user = User.objects.create_user(username="temporary", password="temporary")
-        self.client.force_login(tmp_user)
-        tmp_post = Post.objects.create(
-            title="temporary", body="temporary", author=tmp_user
-        )
+    def test_delete_post_page_success(self):
+        self.client.login(username='gerard', password='motdepasse123')
+        user = User.objects.get(username="gerard")
+        user_post = Post.objects.filter(author=user).first()
         response = self.client.get(
-            reverse("Microlly:delete_post", kwargs={"id": tmp_post.id})
+            reverse("Microlly:delete_post", kwargs={"id": user_post.id})
         )
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "delete_post.html")
+
+    def test_delete_post_page_fail(self):
         # logged out test
-        self.client.logout()
         response = self.client.get(
-            reverse("Microlly:delete_post", kwargs={"id": tmp_post.id})
+            reverse("Microlly:delete_post", kwargs={"id": 1})
         )
         self.failUnlessEqual(response.status_code, 302)
 
     def test_delete_post_done_page(self):
-        tmp_user = User.objects.create_user(username="temporary", password="temporary")
-        self.client.force_login(tmp_user)
-        tmp_post = Post.objects.create(
-            title="temporary", body="temporary", author=tmp_user
-        )
+        self.client.login(username='gerard', password='motdepasse123')
+        user = User.objects.get(username="gerard")
+        user_post = Post.objects.filter(author=user).first()
         response = self.client.post(
-            reverse("Microlly:delete_post", kwargs={"id": tmp_post.id})
+            reverse("Microlly:delete_post", kwargs={"id": user_post.id})
         )
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "delete_post_done.html")
