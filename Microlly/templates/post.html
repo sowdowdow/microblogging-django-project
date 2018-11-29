@@ -1,36 +1,45 @@
 {% extends 'base.html' %} {% block body %}
-<a href="{% url 'Microlly:index' %}">
-    <span class="icon is-large">
-        <i class="fas fa-lg fa-home"></i>
-    </span>
-</a>
-{% if post.author == request.user %}
-<a href="{% url 'Microlly:edit_post' id=post.id %}">
-    <span class="icon is-large has-text-warning">
-        <i class="fas fa-lg fa-edit"></i>
-    </span>
-</a>
-<a href="{% url 'Microlly:delete_post' id=post.id %}">
-    <span class="icon is-large has-text-danger">
-        <i class="fas fa-lg fa-trash"></i>
-    </span>
-</a>
-{% endif %}
-<div>Le {{ post.creation_date }}</div>
-<div>Dernière modification : {{ post.update_date }}</div>
-<br>
-<span>Auteur :
-    <a class="tag is-link" href="{% url 'Microlly:author_posts' author=post.author %}">{{ post.author }}</a>
-</span>
-</br>
-<br>
-<article class="message is-link">
-    <div class="message-header">
-        <h1>{{ post.title }}</h1>
+
+<div class="columns is-mobile">
+    <div class="column is-11 is-offset-1">
+        <a href="{% url 'Microlly:index' %}">
+            <span class="icon is-large">
+                <i class="fas fa-lg fa-home"></i>
+            </span>
+        </a>
+        {% if post.author == request.user %}
+        <a href="{% url 'Microlly:edit_post' id=post.id %}">
+            <span class="icon is-large has-text-warning">
+                <i class="fas fa-lg fa-edit"></i>
+            </span>
+        </a>
+        <a href="{% url 'Microlly:delete_post' id=post.id %}">
+            <span class="icon is-large has-text-danger">
+                <i class="fas fa-lg fa-trash"></i>
+            </span>
+        </a>
+        {% endif %}
+        <br>
+        <span>Auteur :
+            <a class="tag is-link" href="{% url 'Microlly:author_posts' author=post.author %}">{{ post.author }}</a>
+        </span>
+        </br>
+        <br>
+        <article class="message is-link">
+            <div class="message-header">
+                <strong>{{ post.title }}</strong>
+                <small class="is-pulled-right">{{ post.creation_date }}</small>
+            </div>
+            <div class="message-body has-text-black">
+                <p>{{ post.body }}</p>
+                <p class="is-pulled-right">
+                    <small >Dernière modification : {{ post.update_date }}</small>
+                </p>
+                <p> hg</p>
+                <p> </p>
+            </div>
+        </article>
+        </br>
     </div>
-    <div class="message-body has-text-black">
-        {{ post.body }}
-    </div>
-</article>
-</br>
+</div>
 {% endblock body %}
