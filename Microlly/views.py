@@ -89,6 +89,9 @@ def createPost(request):
 def deletePost(request, id):
     post = get_object_or_404(Post, pk=id)
     if request.method == "POST":
+        # cancel case by user
+        if 'cancel' in request.POST:
+            return redirect('Microlly:account')
         # suppress confirmed by user
         if post.author == request.user:
             post.delete()
