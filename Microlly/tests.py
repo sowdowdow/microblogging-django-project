@@ -100,7 +100,7 @@ class WebsiteTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 404)
         self.assertTemplateUsed("404.html")
 
-    def test_edit_page_success_and_forbidden(self):
+    def test_edit_page_success(self):
         # test a possible post editing
         tmp_user = User.objects.get(username="gerard")
         tmp_post = Post.objects.filter(author=tmp_user).first()
@@ -111,7 +111,9 @@ class WebsiteTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "edit_post.html")
 
+    def test_edit_page_forbidden(self):
         # impossible edit test
+        self.client.login(username='gerard', password='motdepasse123')
         tmp_user = User.objects.get(username="marie")
         post_id_not_from_user = Post.objects.filter(author=tmp_user).first().id
         response = self.client.get(
@@ -129,15 +131,12 @@ class WebsiteTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 302)
 
     def test_author_posts_page(self):
-        tmp_user = User.objects.create_user(username="temporary", password="temporary")
-        tmp_post = Post.objects.create(
-            title="temporary", body="temporary", author=tmp_user
-        )
+        author = User.objects.get(pk=1)
         response = self.client.get(
-            reverse("Microlly:author_posts", kwargs={"author": tmp_user})
+            reverse("Microlly:author_posts", kwargs={"author": author})
         )
         self.assertContains(
-            response, "Les publications de <b>" + str(tmp_user) + "</b>"
+            response, "Les publications de <b>" + str(author) + "</b>"
         )
         self.assertEqual(type(response.context["posts"]), Page)
         self.assertTemplateUsed(response, "author_posts.html")
