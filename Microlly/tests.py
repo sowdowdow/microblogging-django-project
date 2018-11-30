@@ -150,3 +150,20 @@ class WebsiteTestCase(TestCase):
         self.assertContains(response, "Modification du mot de passe")
         self.assertTemplateUsed(response, "registration/password_change_form.html")
         self.failUnlessEqual(response.status_code, 200)
+
+    def test_password_change_done(self):
+        self.client.login(username="gerard", password="motdepasse123")
+        response = self.client.post(
+            reverse("Microlly:password_change"),
+            {
+                "old_password": "motdepasse123",
+                "new_password1": "unsupermotdepasse",
+                "new_password2": "unsupermotdepasse",
+            },
+            # follow redirection, useful to check template later
+            follow=True,
+        )
+        print(response)
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "registration/password_change_done.html")
+
