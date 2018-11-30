@@ -31,7 +31,7 @@ class WebsiteTestCase(TestCase):
 
     def test_account_page_success(self):
         # logged in test
-        self.client.login(username='gerard', password='motdepasse123')
+        self.client.login(username="gerard", password="motdepasse123")
         response = self.client.get(reverse("Microlly:account"))
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "account.html")
@@ -41,20 +41,19 @@ class WebsiteTestCase(TestCase):
         response = self.client.get(reverse("Microlly:account"))
         self.failUnlessEqual(response.status_code, 302)
 
-
     def test_create_post_page_success(self):
-        self.client.login(username='gerard', password='motdepasse123')
+        self.client.login(username="gerard", password="motdepasse123")
         response = self.client.get(reverse("Microlly:create_post"))
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "create_post.html")
-    
+
     def test_create_post_page_failure(self):
         # logged out test
         response = self.client.get(reverse("Microlly:create_post"))
         self.failUnlessEqual(response.status_code, 302)
 
     def test_delete_post_page_success(self):
-        self.client.login(username='gerard', password='motdepasse123')
+        self.client.login(username="gerard", password="motdepasse123")
         user = User.objects.get(username="gerard")
         user_post = Post.objects.filter(author=user).first()
         response = self.client.get(
@@ -65,13 +64,11 @@ class WebsiteTestCase(TestCase):
 
     def test_delete_post_page_fail(self):
         # logged out test
-        response = self.client.get(
-            reverse("Microlly:delete_post", kwargs={"id": 1})
-        )
+        response = self.client.get(reverse("Microlly:delete_post", kwargs={"id": 1}))
         self.failUnlessEqual(response.status_code, 302)
 
     def test_delete_post_done_page(self):
-        self.client.login(username='gerard', password='motdepasse123')
+        self.client.login(username="gerard", password="motdepasse123")
         user = User.objects.get(username="gerard")
         user_post = Post.objects.filter(author=user).first()
         response = self.client.post(
@@ -91,12 +88,9 @@ class WebsiteTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed("post.html")
 
-
     def test_post_page_failed(self):
         # specific invalid post page
-        response = self.client.get(
-            reverse("Microlly:post", kwargs={"id": 99999})
-        )
+        response = self.client.get(reverse("Microlly:post", kwargs={"id": 99999}))
         self.failUnlessEqual(response.status_code, 404)
         self.assertTemplateUsed("404.html")
 
@@ -104,7 +98,7 @@ class WebsiteTestCase(TestCase):
         # test a possible post editing
         tmp_user = User.objects.get(username="gerard")
         tmp_post = Post.objects.filter(author=tmp_user).first()
-        self.client.login(username='gerard', password='motdepasse123')
+        self.client.login(username="gerard", password="motdepasse123")
         response = self.client.get(
             reverse("Microlly:edit_post", kwargs={"id": tmp_post.id})
         )
@@ -113,7 +107,7 @@ class WebsiteTestCase(TestCase):
 
     def test_edit_page_forbidden(self):
         # impossible edit test
-        self.client.login(username='gerard', password='motdepasse123')
+        self.client.login(username="gerard", password="motdepasse123")
         tmp_user = User.objects.get(username="marie")
         post_id_not_from_user = Post.objects.filter(author=tmp_user).first().id
         response = self.client.get(
@@ -135,9 +129,24 @@ class WebsiteTestCase(TestCase):
         response = self.client.get(
             reverse("Microlly:author_posts", kwargs={"author": author})
         )
-        self.assertContains(
-            response, "Les publications de <b>" + str(author) + "</b>"
-        )
+        self.assertContains(response, "Les publications de <b>" + str(author) + "</b>")
         self.assertEqual(type(response.context["posts"]), Page)
         self.assertTemplateUsed(response, "author_posts.html")
+        self.failUnlessEqual(response.status_code, 200)
+
+    def test_password_reset(self):
+        response = self.client.get(reverse("Microlly:password_reset"))
+        self.assertContains(response, "Réinitialisation du mot de passe")
+        self.assertTemplateUsed(response, "registration/password_reset_form.html")
+        self.failUnlessEqual(response.status_code, 200)
+
+    def test_password_change_fail(self):
+        response = self.client.get(reverse("Microlly:password_change"))
+        self.failUnlessEqual(response.status_code, 302)
+
+    def test_password_change_success(self):
+        self.client.login(username="gerard", password="motdepasse123")
+        response = self.client.get(reverse("Microlly:password_change"))
+        self.assertContains(response, "Modification du mot de passe")
+        self.assertTemplateUsed(response, "registration/password_change_form.html")
         self.failUnlessEqual(response.status_code, 200)
