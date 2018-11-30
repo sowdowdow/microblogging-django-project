@@ -11,7 +11,7 @@ from django.views.generic.edit import CreateView
 from Microlly import forms, ranking
 from Microlly.models import Post
 
-
+# the index listing all the posts
 def index(request):
     try:
         page = int(request.GET.get("page"))
@@ -22,21 +22,10 @@ def index(request):
     posts = paginator.page(page)
     return render(request, "index.html", {"posts": posts})
 
-
+# unique view of a post
 def post(request, id):
     post = get_object_or_404(Post, pk=id)
     return render(request, "post.html", {"post": post})
-
-
-def login(request):
-    username = request.POST["username"]
-    password = request.POST["password"]
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        redirect("Microlly:account")
-    else:
-        redirect("Microlly:login")
 
 
 def signup(request):

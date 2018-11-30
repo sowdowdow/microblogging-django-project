@@ -23,6 +23,24 @@ class WebsiteTestCase(TestCase):
         self.failUnlessEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "registration/login.html")
 
+    def test_login_page_success(self):
+        response = self.client.post(
+            reverse("Microlly:login"),
+            {"username": "gerard", "password": "motdepasse123"},
+            follow=True,
+        )
+        self.assertContains(response, "Mon Compte")
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "account.html")
+
+    def test_login_page_fail(self):
+        response = self.client.post(
+            reverse("Microlly:login"),
+            {"username": "gerard", "password": "mauvaismotdepasse"},
+        )
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "registration/login.html")
+
     def test_signup_page(self):
         response = self.client.get(reverse("Microlly:signup"))
         self.assertContains(response, "Créer un compte")
