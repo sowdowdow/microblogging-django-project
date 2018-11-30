@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>Connexion</h1>
-<form method="post" action="{% url 'Microlly:login' %}">
-    {% include "form_snippet.html" %}
-    <input type="submit" value="Se connecter">
-</form>
-<p>
-    Pas encore de compte ? <a href="{% url 'Microlly:signup' %}">Créez-en un !</a>
-</p>
+    <h1>Connexion</h1>
+    <form method="post" action="{% url 'Microlly:login' %}">
+        {% include "form_snippet.html" %}
+        <input type="submit" value="Se connecter">
+    </form>
+    <button href="{% url 'Microlly:signup' %}" class="button is-success">
+            Créer un compte
+    </button>
+    <p>
+        Mot de passe oublié ? <a href="{% url 'Microlly:password_reset' %}">Cliquez ici</a>
+    </p>
 {% endblock body %}
