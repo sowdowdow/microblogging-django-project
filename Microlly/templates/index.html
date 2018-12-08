@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-    <h1>Liste des dernières publications</h1>
+    <h1 class="title has-text-link">Les dernières news</h1>
     <div>
         {% for post in posts %}
             <div class="box">
@@ -13,8 +13,29 @@
             </div>
         {% endfor %}
     </div>
-    
-    <div class="pagination">
+    <br>
+    <nav class="pagination is-right" role="navigation" aria-label="pagination">
+            {% if posts.has_previous %}
+            <a class="pagination-previous" href="?page={{ posts.previous_page_number }}">Previous</a>
+            {% endif %}
+            {% if posts.has_next %}
+            <a class="pagination-next" href="?page={{ posts.next_page_number }}">Next page</a>
+            {% endif %}
+            <ul class="pagination-list">
+              <li><a class="pagination-link" href="?page=1">&laquo; First</a></li>
+              <!--<li><span class="pagination-ellipsis">&hellip;</span></li>
+              <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
+              <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
+              <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
+              <li><span class="pagination-ellipsis">&hellip;</span></li>-->
+              <span class="current">
+                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                </span>
+              <li><a href="?page={{ posts.paginator.num_pages }}" class="pagination-link" aria-label="Goto page 86">Last &raquo;</a></li>
+            </ul>
+    </nav>
+    </br>
+    <!--<div class="pagination">
         <span class="step-links">
             {% if posts.has_previous %}
                 <a href="?page=1">&laquo; first</a>
@@ -30,5 +51,5 @@
                 <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
-    </div>
+    </div>-->
 {% endblock body %}
