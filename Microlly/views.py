@@ -4,12 +4,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
+from django.forms.models import model_to_dict
+from django.http import JsonResponse
 from django.shortcuts import get_list_or_404, get_object_or_404, redirect, render
 from django.views.defaults import page_not_found
 from django.views.generic.edit import CreateView
 
 from Microlly import forms, ranking
-from Microlly.models import Post
+from Microlly.models import Comment, Post
+
 
 # the index listing all the posts
 def index(request):
@@ -22,10 +25,15 @@ def index(request):
     posts = paginator.page(page)
     return render(request, "index.html", {"posts": posts})
 
+
 # unique view of a post
 def post(request, id):
     post = get_object_or_404(Post, pk=id)
-    return render(request, "post.html", {"post": post})
+    comments = Comment.objects.filter(post=post)
+    comment_form = forms.CommentCreateForm()
+    return render(
+        request, "post.html", {"post": post, "form": comment_form, "comments": comments}
+    )
 
 
 def signup(request):
@@ -79,8 +87,8 @@ def deletePost(request, id):
     post = get_object_or_404(Post, pk=id)
     if request.method == "POST":
         # cancel case by user
-        if 'cancel' in request.POST:
-            return redirect('Microlly:account')
+        if "cancel" in request.POST:
+            return redirect("Microlly:account")
         # suppress confirmed by user
         if post.author == request.user:
             post.delete()
@@ -122,3 +130,46 @@ def authorPosts(request, author):
     paginator = Paginator(posts, 5)
     posts = paginator.page(page)
     return render(request, "author_posts.html", {"posts": posts, "author": author})
+
+
+@login_required
+def commentCreate(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "expected POST method"})
+
+    comment_form = forms.CommentCreateForm(request.POST or None)
+
+    if comment_form.is_valid():
+        new_comment = comment_form.save(commit=False)
+        new_comment.author = request.user
+        new_comment.post = Post.objects.get(pk=request.POST["post"])
+        new_comment.save()
+        return redirect("Microlly:post", id=request.POST["post"])
+    else:
+        return JsonResponse({"error": "saving failed"})
+
+
+def commentRead(request, id):
+    comment = get_object_or_404(Comment, pk=id)
+    return JsonResponse(model_to_dict(comment))
+
+
+@login_required
+def commentUpdate(request, id):
+    comment = get_object_or_404(Comment, pk=id)
+    post_id = Post.objects.get(title=comment.post).id
+    if comment.author != request.user:
+        raise PermissionDenied
+    # TODO
+    # create the modify comment view or what else ?
+    return redirect("Microlly:post", id=post_id)
+
+
+@login_required
+def commentDelete(request, id):
+    comment = get_object_or_404(Comment, pk=id)
+    if comment.author != request.user:
+        raise PermissionDenied
+    comment.delete()
+    return redirect("Microlly:post", id=comment.post.id)
+

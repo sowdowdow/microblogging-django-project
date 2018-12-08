@@ -11,16 +11,20 @@
                 {% if user.is_authenticated %}
                 <div class="is-pulled-right">Connecté en temps que
                     <i>{{ user.username }}</i>,
-                    <a href="{% url 'Microlly:logout' %}">Déconnexion 🚪</a>
+                    <a href="{% url 'Microlly:logout' %}">
+                        Déconnexion 
+                        <span class="icon has-text-danger">
+                            <i class="fas fa-sm fa-sign-out-alt"></i>
+                        </span></a>
                 </div>
 
                 {% else %}
                 <a href="{% url 'Microlly:login' %}" class="is-pulled-right">Se connecter</a>
                 {% endif %}
                 <h1 class="title" clas="is-overlay">
-                    <a href="{% url 'Microlly:index' %}">Microlly</a>
+                    <a href="{% url 'Microlly:index' %}" class="microlly">Microlly</a>
                 </h1>
-                <h2 class="subtitle">
+                <h2 class="subtitle microlly">
                     Bienvenue
                 </h2>
             </div>

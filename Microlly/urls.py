@@ -28,4 +28,9 @@ urlpatterns = [
     path("edit-post/<int:id>/", views.editPost, name="edit_post"),
     path("delete-post/<int:id>/", views.deletePost, name="delete_post"),
     path("<slug:author>/posts/", views.authorPosts, name="author_posts"),
+    # Comments
+    path("comment/create/", views.commentCreate, name="comment_create"),
+    path("comment/read/<int:id>/", views.commentRead, name="comment_read"),
+    path("comment/update/<int:id>/", views.commentUpdate, name="comment_update"),
+    path("comment/delete/<int:id>/", views.commentDelete, name="comment_delete"),
 ]
