@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
 {% block body %}
-    <h1>La publication <i>{{ post }}</i> a bien été supprimé. ✅</h1>
+        <div class="icon is-large has-text-success">
+            <i class="fas fa-3x fa-check"></i>
+        </div>
+        <h1 class="subtitle is-4 has-text-black">La publication <i>{{ post }}</i> a bien été supprimé.</h1>
 {% endblock body %}
