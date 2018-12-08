@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 {% block body %}
-    <h1>Voulez-vous vraiment supprimer le post suivant :</h1>
+    <h1 class="title is-4 has-text-link">Voulez-vous vraiment supprimer le post suivant :</h1>
     <div>
+        <div class="subtitle has-text-black">
         <i>{{ post }}</i> datant du {{ post.creation_date }}
+        </div>
         <form method="post" action="{% url 'Microlly:delete_post' id=id%}">
             {% csrf_token %}       
-            <input class="button is-primary" type="submit" name="submit" value="Confirmer la suppression">
+            <input class="button is-success" type="submit" name="submit" value="Confirmer la suppression">
             <input class="button is-light" type="submit" name="cancel" value="Annuler">
         </form>
     </div>
