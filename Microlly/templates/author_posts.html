@@ -6,7 +6,7 @@
             <div class="box">
             <a href="{% url 'Microlly:post' id=post.id %}"><h3 class="title">{{ post.title }}</h3></a>
             <div>Le {{ post.creation_date }}</div>
-            <p>{{ post.body }}</p>
+            <p>{{ post.body|truncatechars:240 }}</p>
             </div>
         {% endfor %}
     </div>

@@ -7,10 +7,13 @@
             <a href="{% url 'Microlly:post' id=post.id %}"><h3 class="title">{{ post.title }}</h3></a>
             <div>Le {{ post.creation_date }}</div>
             <span>Auteur : <a href="{% url 'Microlly:author_posts' author=post.author %}">{{ post.author }}</a></span>
-            <p>{{ post.body }}</p>
+            <p>
+                {{ post.body|truncatechars:200 }}
+            </p>
             </div>
         {% endfor %}
     </div>
+    
     <div class="pagination">
         <span class="step-links">
             {% if posts.has_previous %}
