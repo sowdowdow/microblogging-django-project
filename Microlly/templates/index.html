@@ -8,7 +8,7 @@
             <div>Le {{ post.creation_date }}</div>
             <span>Auteur : <a href="{% url 'Microlly:author_posts' author=post.author %}">{{ post.author }}</a></span>
             <p>
-                {{ post.body|truncatechars:200 }}
+                {{ post.body|cut:"<br>"|safe|truncatewords_html:25 }}
             </p>
             </div>
         {% endfor %}

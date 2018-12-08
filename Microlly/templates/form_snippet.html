@@ -1,5 +1,6 @@
 {% csrf_token %}
 {% for field in form %}
+    {{ form.media }}
     <div class="field">
         {{ field.errors }}
         {{ field.label_tag }} 

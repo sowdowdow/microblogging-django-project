@@ -31,7 +31,7 @@
                 <small class="is-pulled-right">{{ post.creation_date }}</small>
             </div>
             <div class="message-body has-text-black">
-                <p>{{ post.body }}</p>
+                <p>{{ post.body|safe }}</p>
                 <p class="is-pulled-right">
                     <small >Dernière modification : {{ post.update_date }}</small>
                 </p>
