@@ -11,19 +11,19 @@
         <div class="level-item has-text-centered">
             <div>
             <p class="heading">Publications</p>
-            <p class="title">{{ user_posts.count }}</p>
+            <p class="title">{{ user.posts.count }}</p>
             </div>
         </div>
         <div class="level-item has-text-centered">
             <div>
             <p class="heading">Likes</p>
-            <p class="title">0</p>
+            <p class="title">{{ user.likes.count }}</p>
             </div>
         </div>
         <div class="level-item has-text-centered">
             <div>
             <p class="heading">Commentaires</p>
-            <p class="title">{{ user_comments.count }}</p>
+            <p class="title">{{ user.comments.count }}</p>
             </div>
         </div>
         <div class="level-item has-text-centered">
@@ -57,7 +57,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for post in user_posts %}
+                    {% for post in user.posts.all %}
                         <tr>
                             <td><a href="{% url 'Microlly:post' id=post.id %}">{{ post.title }}</a></td>
                             <td>{{ post.creation_date }}</td>
@@ -85,6 +85,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
     <div class="container is-widescreen">
         <div class="notification">
             <h2 class="title has-text-link">Mes commentaires :</h2>
@@ -99,7 +100,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for comment in user_comments %}
+                    {% for comment in user.comments.all %}
                     <tr>
                         <td>{{ comment.message|truncatechars:25 }}</td>
                         <td>{{ comment.creation_date }}</td>
@@ -118,6 +119,36 @@
                                 </span>
                             </a>
                         </td>
+                        </tr>
+                        {% empty %}
+                            <div class="box">Vous n'avez rien rédigé pour le moment.</div>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>            
+    </div>
+
+    <div class="container is-widescreen">
+        <div class="notification">
+            <h2 class="title has-text-link">Mes Likes :</h2>
+            <table class="table is-hoverable is-fullwidth">
+                <thead>
+                    <tr>
+                        <th><abbr title="Titre">Contenu</abbr></th>
+                        <th class="has-text-centered"><abbr title="Supprimer l'article">Supprimer</abbr></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for like in user.likes.all %}
+                        <tr>
+                            <td>{{ like.post.title|truncatechars:50 }}</td>
+                            <td class="has-text-centered">
+                                <a href="{% url 'Microlly:post_like' id=like.post.id %}">
+                                    <span class="icon has-text-danger">
+                                        <i class="fas fa-trash has-text-centered"></i>
+                                    </span>
+                                </a>
+                            </td>
                         </tr>
                         {% empty %}
                             <div class="box">Vous n'avez rien rédigé pour le moment.</div>
