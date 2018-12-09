@@ -56,7 +56,7 @@
                     {{ comment.message }}
                 </p>
 
-                {% if post.author == request.user %}
+                {% if comment.author == request.user %}
                     <a href="{% url 'Microlly:comment_update' id=comment.id %}">
                         <span class="icon has-text-warning">
                             <i class="fas fa-sm fa-edit"></i>
