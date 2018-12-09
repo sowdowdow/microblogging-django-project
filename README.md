@@ -9,6 +9,7 @@
 Simon Dormeau  
 Lucille Tyrakowski 
 
+## Goal of the project
 This project is (proudly ?) made in french.
 
 The goal of this one is to learn **Python**, **Django** and **TDD** at the same time *ough* !
@@ -31,6 +32,35 @@ The concept is simple, a **public blog** where anybody can register and write so
 
 The subject can be found [here](https://www.delahayeyourself.info/modules/LP%20Web%20Dynamique/django/projet/).
 
+## Main features
+ - Any user can register an account / login / lougout /change password
+ - Any user can read any `Post`
+ - Any user can create / update / delete his `Posts`
+## Additionnal features
+ - [RTF](https://fr.wikipedia.org/wiki/Rich_Text_Format) `Post` edition
+ - Any user can `Comment` any `Post`
+ - Any user can create / update / delete his `Comments`
+ - Any user can `Like` any `Post`
+ - Any user can delete his `Likes`
 
+## Installation
 
+To install this project you need to install `git`, `python3`, `pip` and `VirtualEnv` preferably on a Linux environment.  
+Next, make a virtual env :  
+ - `virtualenv -p python3 <foldername>`
 
+Go into this folder, then activate the environment :  
+ - `cd <foldername>`
+ - `source bin/activate`
+
+Clone the repository and go inside the folder :
+ - `git clone https://github.com/sowdowdow/microblogging-django-project`
+ - `cd microblogging-django-project/`
+
+Install requirements :
+ - `pip install -r requirements.txt`
+
+Launch server :
+ - `python manage.py runserver`
+
+That's it ! now you can try it at http://127.0.0.1:8000/.
