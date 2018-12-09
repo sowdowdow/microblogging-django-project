@@ -43,8 +43,8 @@
         </a>
     </section>
 
-    <div class="columns">
-        <div class="column">
+    <div class="container is-widescreen">
+        <div class="notification">
             <h2 class="title has-text-link">Mes publications :</h2>
             <table class="table is-hoverable is-fullwidth">
                 <thead>
@@ -83,51 +83,47 @@
                 </tbody>
             </table>
         </div>
-        <div class="column">
+    <div class="container is-widescreen">
+        <div class="notification">
             <h2 class="title has-text-link">Mes commentaires :</h2>
             <table class="table is-hoverable is-fullwidth">
                 <thead>
                     <tr>
-                    <th><abbr title="Titre">Contenu</abbr></th>
-                    <th><abbr title="Date de création">Création</abbr></th>
-                    <th><abbr title="Date de dernière modification">Modification</abbr></th>
-                    <th><abbr title="Modifier l'article">Modifier</abbr></th>
-                    <th><abbr title="Supprimer l'article">Supprimer</abbr></th>
+                        <th><abbr title="Titre">Contenu</abbr></th>
+                        <th><abbr title="Date de création">Création</abbr></th>
+                        <th><abbr title="Date de dernière modification">Modification</abbr></th>
+                        <th><abbr title="Modifier l'article">Modifier</abbr></th>
+                        <th><abbr title="Supprimer l'article">Supprimer</abbr></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for comment in user_comments %}
-                        <tr>
-                            <td>{{ comment.message|truncatechars:25 }}</td>
-                            <td>{{ comment.creation_date }}</td>
-                            <td>{{ comment.update_date }}</td>
-                            <td>
-                                <a href="{% url 'Microlly:comment_update' id=comment.id %}">
-                                    <span class="icon has-text-warning">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{% url 'Microlly:comment_delete' id=comment.id %}">
-                                    <span class="icon has-text-danger">
-                                        <i class="fas fa-trash"></i>
-                                    </span>
-                                </a>
-                            </td>
+                    <tr>
+                        <td>{{ comment.message|truncatechars:25 }}</td>
+                        <td>{{ comment.creation_date }}</td>
+                        <td>{{ comment.update_date }}</td>
+                        <td>
+                            <a href="{% url 'Microlly:comment_update' id=comment.id %}">
+                                <span class="icon has-text-warning">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'Microlly:comment_delete' id=comment.id %}">
+                                <span class="icon has-text-danger">
+                                    <i class="fas fa-trash"></i>
+                                </span>
+                            </a>
+                        </td>
                         </tr>
-                    {% empty %}
-                        <div class="box">Vous n'avez rien rédigé pour le moment.</div>
-                    {% endfor %}
+                        {% empty %}
+                            <div class="box">Vous n'avez rien rédigé pour le moment.</div>
+                        {% endfor %}
                 </tbody>
             </table>
-        </div>
+        </div>            
     </div>
-
-
-
-
-
         <a href="{% url 'Microlly:password_change' %}">
             <p>🔑 Modifier mon mot de passe</p>
         </a>

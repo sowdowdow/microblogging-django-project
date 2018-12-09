@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block body %}
-    <h1>Les publications de <b>{{ author }}</b> : </h1>
+    <h1 class="title is-4 has-text-link">Les publications de <b>{{ author }}</b> : </h1>
     <div>
         {% for post in posts %}
             <div class="box">
