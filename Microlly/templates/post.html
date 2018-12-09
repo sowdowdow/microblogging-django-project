@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% block body %}
 
-<div class="container is-widescreen">
+<div class="columns is-mobile">
+    <div class="column is-11 is-offset-1">
         <a href="{% url 'Microlly:index' %}">
             <span class="icon is-large">
                 <i class="fas fa-lg fa-home"></i>
@@ -19,24 +20,26 @@
         </a>
         {% endif %}
         <br>
-            <span>Auteur :
-                <a class="tag is-link is-medium" href="{% url 'Microlly:author_posts' author=post.author %}">{{ post.author|title }}</a>
-            </span>
+        <span>Auteur :
+            <a class="tag is-link" href="{% url 'Microlly:author_posts' author=post.author %}">{{ post.author|title }}</a>
+        </span>
         </br>
         <br>
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-header-title">{{ post.title }} - {{ post.creation_date }}</div>
-                </div>
-                <div class="card-content">
-                    <p>{{ post.body|safe }}</p>
-                    <time class="is-pulled-right">
-                        <small >Dernière modification : {{ post.update_date }}</small>
-                    </time>
-                </div>
+        <article class="message is-link">
+            <div class="message-header">
+                <strong>{{ post.title }}</strong>
+                <small class="is-pulled-right">{{ post.creation_date }}</small>
             </div>
+            <div class="message-body has-text-black">
+                <p>{{ post.body|safe }}</p>
+                <p class="is-pulled-right">
+                    <small >Dernière modification : {{ post.update_date }}</small>
+                </p>
+            </div>
+        </article>
         </br>
 
+        
         <form method="post" action="{% url 'Microlly:comment_create' %}" class="box is-light">
             <input type="hidden" name="post" value="{{ post.id }}">
             {% include "form_snippet.html" %}
@@ -82,5 +85,7 @@
                 </div>
             </article>
         {% endfor %}
+        
+    </div>
 </div>
 {% endblock body %}
