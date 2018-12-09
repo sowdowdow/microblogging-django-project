@@ -11,7 +11,7 @@ from django.views.defaults import page_not_found
 from django.views.generic.edit import CreateView
 
 from Microlly import forms, ranking
-from Microlly.models import Comment, Post
+from Microlly.models import Comment, Post, Like
 
 
 # the index listing all the posts
@@ -138,7 +138,7 @@ def commentCreate(request):
         return JsonResponse({"error": "expected POST method"})
 
     comment_form = forms.CommentCreateForm(request.POST or None)
-    
+
     if comment_form.is_valid():
         new_comment = comment_form.save(commit=False)
         new_comment.author = request.user
@@ -173,3 +173,21 @@ def commentDelete(request, id):
     comment.delete()
     return redirect("Microlly:post", id=comment.post.id)
 
+
+@login_required
+def postLike(request, id):
+    try:
+        like = Like.objects.get(author=request.user, post=id)
+    except Like.DoesNotExist as exception:
+        like = None
+
+    if like != None:
+        # If the post is liked, we dislike it
+        like.delete()
+    else:
+        # If the post not liked -> like it
+        post = Post.objects.get(pk=id)
+        like = Like.objects.create(author=request.user, post=post)
+        like.save()
+
+    return redirect("Microlly:post", id=id)

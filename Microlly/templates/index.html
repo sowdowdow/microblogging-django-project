@@ -11,14 +11,24 @@
                     {{ post.body|cut:"<br>"|safe|truncatewords_html:25 }}
                 </p>
 
-                {% if post.comments.count %}
-                    <div class="media has-text-grey-light">
-                        <span class="icon">
-                            <i class="fas fa-comments"></i>
-                        </span>
-                        {{ post.comments.count }}
-                    </div>
-                {% endif %}
+                <div class="level-left has-text-grey">
+                    {% if post.comments.count %}
+                            <div class="level-item">
+                                <span class="icon has-text-info">
+                                    <i class="fas fa-comments"></i>
+                                </span>
+                                {{ post.comments.count }}
+                            </div>
+                    {% endif %}
+                    {% if post.likes.count %}
+                            <div class="level-item">
+                                <span class="icon has-text-danger">
+                                    <i class="fas fa-heart"></i>
+                                </span>
+                            {{ post.likes.count }}
+                            </div>
+                    {% endif %}
+                </div>
 
             </div>
         {% endfor %}

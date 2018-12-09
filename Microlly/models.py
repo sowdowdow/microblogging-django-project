@@ -37,3 +37,12 @@ class Comment(models.Model):
         ordering = ("-id",)
         verbose_name = "Commentaire"
         verbose_name_plural = "Commentaires"
+
+
+class Like(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="likes")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes")
+
+    class Meta:
+        verbose_name = "Like"
+        verbose_name_plural = "Likes"

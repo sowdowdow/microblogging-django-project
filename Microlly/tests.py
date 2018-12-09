@@ -196,11 +196,8 @@ class WebsiteTestCase(TestCase):
         self.client.login(username="gerard", password="motdepasse123")
         response = self.client.post(
             reverse("Microlly:comment_create"),
-            {
-                "message": "Content of the comment bla bla bla.",
-                "post": 1,
-            },
-            follow=True
+            {"message": "Content of the comment bla bla bla.", "post": 1},
+            follow=True,
         )
         self.failUnlessEqual(response.status_code, 200)
         self.assertEqual(type(response), HttpResponse)
@@ -254,7 +251,7 @@ class WebsiteTestCase(TestCase):
                 kwargs={"id": 1},  # gerard is not owner of comment 1
             )
         )
-        self.failUnlessEqual(response.status_code, 302) # this is to fix -> 403
+        self.failUnlessEqual(response.status_code, 302)  # this is to fix -> 403
 
     def test_comment_delete_fail_unconnected(self):
         response = self.client.delete(
@@ -270,3 +267,24 @@ class WebsiteTestCase(TestCase):
             )
         )
         self.failUnlessEqual(response.status_code, 302)
+
+    def test_like_post_fail(self):
+        # fail because not connected
+        response = self.client.get(
+            reverse(
+                "Microlly:post_like", kwargs={"id": 1}
+            )
+        )
+        self.failUnlessEqual(response.status_code, 302)
+        self.assertEqual(type(response), HttpResponseRedirect)
+
+    def test_like_post_success(self):
+        self.client.login(username="gerard", password="motdepasse123")
+        response = self.client.get(
+            reverse(
+                "Microlly:post_like", kwargs={"id": 1}
+            ),
+            follow=True
+        )
+        self.failUnlessEqual(response.status_code, 200)
+        self.assertEqual(type(response), HttpResponse)

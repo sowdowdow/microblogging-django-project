@@ -36,9 +36,20 @@
                     <small >Dernière modification : {{ post.update_date }}</small>
                 </p>
             </div>
-        </article>
-        </br>
 
+            <div class="level-left has-text-grey">
+                <div class="level-item">
+                    <a href="{% url 'Microlly:post_like' id=post.id%}" id="like-button">
+                        <span class="icon has-text-danger">
+                            <i class="fas fa-heart"></i>
+                        </span>
+                    </a>
+                    {{ post.likes.count }}
+                </div>
+            </div>
+        </article>
+        
+        </br>
         
         <form method="post" action="{% url 'Microlly:comment_create' %}" class="box is-light">
             <input type="hidden" name="post" value="{{ post.id }}">

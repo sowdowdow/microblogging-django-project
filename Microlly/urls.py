@@ -33,4 +33,6 @@ urlpatterns = [
     path("comment/read/<int:id>/", views.commentRead, name="comment_read"),
     path("comment/update/<int:id>/", views.commentUpdate, name="comment_update"),
     path("comment/delete/<int:id>/", views.commentDelete, name="comment_delete"),
+    # Likes
+    path("like/post/<int:id>/", views.postLike, name="post_like"),
 ]
