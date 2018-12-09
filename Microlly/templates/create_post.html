@@ -2,6 +2,6 @@
 <h1 class="title is-4 has-text-link">Écrire un article :</h1>
 <form method="post" action="{% url 'Microlly:create_post' %}">
     {% include "form_snippet.html" %}
-    <input type="submit" value="Publier">
+    <input class="button is-success is-pulled-right" type="submit" value="Publier">
 </form>
 {% endblock body %}
