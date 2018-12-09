@@ -39,36 +39,51 @@
         </article>
         </br>
 
-        <h1>Laissez un commentaire :</h1>
-        <form method="post" action="{% url 'Microlly:comment_create' %}">
+        
+        <form method="post" action="{% url 'Microlly:comment_create' %}" class="box is-light">
             <input type="hidden" name="post" value="{{ post.id }}">
             {% include "form_snippet.html" %}
-            <input type="submit" value="Publier">
+            <div class="control">
+                <input type="submit" value="Envoyer" class="button">
+            </div>
         </form>
+            
+        <p>{{ comments.count }} commentaires</p>
 
         {% for comment in comments %}
-            <div class="box">
-                <h4>
-                    {{ comment.author|title }} 
-                    <span class="is-pulled-right">{{ comment.creation_date }}</span>
-                    </h4>
-                <p>
-                    {{ comment.message }}
-                </p>
+            <article class="media">
+                <figure class="media-left">
+                    <p class="image is-64x64">
+                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                    </p>
+                </figure>
+                
+                <div class="media-content">
 
-                {% if comment.author == request.user %}
-                    <a href="{% url 'Microlly:comment_update' id=comment.id %}">
-                        <span class="icon has-text-warning">
-                            <i class="fas fa-sm fa-edit"></i>
-                        </span>
-                    </a>
-                    <a href="{% url 'Microlly:comment_delete' id=comment.id %}">
-                        <span class="icon has-text-danger">
-                            <i class="fas fa-sm fa-trash"></i>
-                        </span>
-                    </a>
-                    {% endif %}
-            </div>
+                    <div class="content">
+                        <strong>{{ comment.author|title }}</strong>
+                        <small>{{ comment.creation_date|date:"j M Y" }}</small>
+                        <p>{{ comment.message }}</p>
+                    </div>
+
+                    <nav class="level is-mobile">
+                        <div class="level-left">
+                            {% if comment.author == request.user %}
+                                <a class="level-item" href="{% url 'Microlly:comment_update' id=comment.id %}">
+                                    <span class="icon is-small has-text-warning">
+                                        <i class="fas fa-sm fa-edit"></i>
+                                    </span>
+                                </a>
+                                <a class="level-item" href="{% url 'Microlly:comment_delete' id=comment.id %}">
+                                    <span class="icon is-small has-text-danger">
+                                        <i class="fas fa-sm fa-trash"></i>
+                                    </span>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </nav>
+                </div>
+            </article>
         {% endfor %}
         
     </div>
