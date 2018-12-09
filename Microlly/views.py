@@ -49,16 +49,12 @@ def signup(request):
 
 @login_required
 def account(request):
-    user_posts = Post.objects.filter(author=request.user).all()
-    user_comments = Comment.objects.filter(author=request.user).all()
-    user_rank = ranking.get_rank(len(user_posts))
+    user_rank = ranking.get_rank(len(request.user.posts.all()))
     isaccountview = True
     return render(
         request,
         "account.html",
         {
-            "user_posts": user_posts,
-            "user_comments": user_comments,
             "isaccountview": isaccountview,
             "rank": user_rank,
         },

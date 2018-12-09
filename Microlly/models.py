@@ -7,7 +7,7 @@ from ckeditor.fields import RichTextField
 class Post(models.Model):
     title = models.CharField(max_length=150)
     body = RichTextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     creation_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
 
@@ -22,7 +22,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     message = models.CharField(max_length=250)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     creation_date = models.DateField(auto_now_add=True)
     update_date = models.DateField(auto_now=True)
