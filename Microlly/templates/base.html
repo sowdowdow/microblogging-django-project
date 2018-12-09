@@ -38,7 +38,7 @@
     <main>
         <section class="section wrapper">
             <div class="container">
-                {% if user.is_authenticated and not isaccountview %}
+                {% if user.is_authenticated and not isaccountview%}
                 <a href="{% url 'Microlly:account' %}" class="button is-link is-outlined is-pulled-right">Mon compte</a>
                 {% endif %} {% block body %} {% endblock body %}
             </div>
