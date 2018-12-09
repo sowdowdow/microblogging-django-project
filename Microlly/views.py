@@ -138,7 +138,7 @@ def commentCreate(request):
         return JsonResponse({"error": "expected POST method"})
 
     comment_form = forms.CommentCreateForm(request.POST or None)
-
+    
     if comment_form.is_valid():
         new_comment = comment_form.save(commit=False)
         new_comment.author = request.user
