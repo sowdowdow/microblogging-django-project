@@ -8,3 +8,9 @@ body {
     flex: 1;
     transition: all 1s ease-out;
   }
+.icon {
+  display: inline-block;
+}
+.microlly{
+  font-family: 'Gruppo', cursive;
+}

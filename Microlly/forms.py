@@ -17,3 +17,10 @@ class PostEditForm(forms.ModelForm):
             'title',
             'body',
         ]
+
+class CommentCreateForm(forms.ModelForm):
+    class Meta:
+        model = models.Comment
+        fields = [
+            'message',
+        ]

@@ -253,5 +253,27 @@
             "creation_date": "2018-11-27",
             "update_date": "2018-11-27"
         }
+    },
+    {
+        "model": "Microlly.comment",
+        "pk": 1,
+        "fields": {
+            "message": "First comment",
+            "author": 2,
+            "post": 14,
+            "creation_date": "2018-12-08",
+            "update_date": "2018-12-08"
+        }
+    },
+    {
+        "model": "Microlly.comment",
+        "pk": 2,
+        "fields": {
+            "message": "Le com' de gerard",
+            "author": 2,
+            "post": 15,
+            "creation_date": "2018-12-08",
+            "update_date": "2018-12-08"
+        }
     }
 ]
