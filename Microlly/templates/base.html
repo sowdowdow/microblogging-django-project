@@ -9,13 +9,14 @@
         <div class="hero-body">
             <div class="container">
                 {% if user.is_authenticated %}
-                <div class="is-pulled-right">Connecté en temps que
+                <div class="is-pulled-right">Connecté en tant que
                     <i>{{ user.username }}</i>,
                     <a href="{% url 'Microlly:logout' %}">
-                        Déconnexion 
+                        <strong>Déconnexion</strong>
                         <span class="icon has-text-danger">
                             <i class="fas fa-sm fa-sign-out-alt"></i>
-                        </span></a>
+                        </span>
+                    </a>
                 </div>
 
                 {% else %}

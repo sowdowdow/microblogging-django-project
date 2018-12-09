@@ -14,7 +14,7 @@
         {% endfor %}
     </div>
     <br>
-    <nav class="pagination is-right" role="navigation" aria-label="pagination">
+        <nav class="pagination is-right" role="navigation" aria-label="pagination">
             {% if posts.has_previous %}
             <a class="pagination-previous" href="?page={{ posts.previous_page_number }}">Previous</a>
             {% endif %}
@@ -23,17 +23,12 @@
             {% endif %}
             <ul class="pagination-list">
               <li><a class="pagination-link" href="?page=1">&laquo; First</a></li>
-              <!--<li><span class="pagination-ellipsis">&hellip;</span></li>
-              <li><a class="pagination-link" aria-label="Goto page 45">45</a></li>
-              <li><a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a></li>
-              <li><a class="pagination-link" aria-label="Goto page 47">47</a></li>
-              <li><span class="pagination-ellipsis">&hellip;</span></li>-->
               <span class="current">
-                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}
                 </span>
               <li><a href="?page={{ posts.paginator.num_pages }}" class="pagination-link" aria-label="Goto page 86">Last &raquo;</a></li>
             </ul>
-    </nav>
+        </nav>
     </br>
     <!--<div class="pagination">
         <span class="step-links">

@@ -11,6 +11,22 @@
         {% endfor %}
     </div>
 
+    <nav class="pagination is-right" role="navigation" aria-label="pagination">
+            {% if posts.has_previous %}
+            <a class="pagination-previous" href="?page={{ posts.previous_page_number }}">Previous</a>
+            {% endif %}
+            {% if posts.has_next %}
+            <a class="pagination-next" href="?page={{ posts.next_page_number }}">Next page</a>
+            {% endif %}
+            <ul class="pagination-list">
+                <li><a class="pagination-link" href="?page=1">&laquo; First</a></li>
+                <span class="current">
+                    Page {{ posts.number }} of {{ posts.paginator.num_pages }}
+                </span>
+              <li><a href="?page={{ posts.paginator.num_pages }}" class="pagination-link">Last &raquo;</a></li>
+            </ul>
+    </nav>
+<!--
     <div class="pagination">
         <span class="step-links">
             {% if posts.has_previous %}
@@ -28,4 +44,5 @@
             {% endif %}
         </span>
     </div>
+-->
 {% endblock body %}
