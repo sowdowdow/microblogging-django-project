@@ -5,5 +5,6 @@
 <form method="post">
     {% include "form_snippet.html" %}
     <input class="button is-success is-pulled-right" type="submit" value="Modifier">
+    <a class="button is-grey is-pulled-right" href="{% url 'Microlly:account' %}">Annuler</a>
 </form>
 {% endblock body %}

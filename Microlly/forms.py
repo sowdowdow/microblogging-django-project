@@ -21,6 +21,17 @@ class PostCreateForm(forms.ModelForm):
 
 
 class PostEditForm(forms.ModelForm):
+    title = forms.CharField(
+        required=True, min_length=5, max_length=150, label="", widget=forms.TextInput(
+            attrs={
+                "class": "input is-link",
+                "placeholder": "Titre de l'article",
+            }
+        )
+    )
+    body = forms.CharField(
+        required=True, min_length=10, label="", widget=CKEditorWidget()
+    )
     class Meta:
         model = models.Post
         fields = ["id", "title", "body"]
