@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1 class="title has-text-link">Connexion</h1>
-    <form method="post" action="{% url 'Microlly:login' %}">
-        {% include "form_snippet.html" %}
-        <input class="button is-success" type="submit" value="Se connecter">
-    </form>
-    <button href="{% url 'Microlly:signup' %}" class="button is-success">
-            Créer un compte
-    </button>
-    <p>
-        Mot de passe oublié ? <a href="{% url 'Microlly:password_reset' %}">Cliquez ici</a>
-    </p>
+    <div class="columns">
+        <div class="column is-one-third is-offset-one-third has-text-centered">
+            <h1 class="title has-text-link">Connexion</h1>
+            <form method="post" action="{% url 'Microlly:login' %}" class="">
+                {% include "form_snippet.html" %}
+                <input class="button is-success" type="submit" value="Se connecter">
+            </form>
+            <p>
+                Mot de passe oublié ? <a href="{% url 'Microlly:password_reset' %}">Cliquez ici</a>
+            </p>
+            <br>
+            <button href="{% url 'Microlly:signup' %}" class="button is-link">
+                    Créer un compte
+            </button>
+        </div>
+    </div>
 {% endblock body %}
