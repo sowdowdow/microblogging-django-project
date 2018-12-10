@@ -6,9 +6,8 @@
 
 
 > Authors :  
-Simon Dormeau  
-Lucille Tyrakowski 
-
+Simon Dormeau (Sowdowdow)
+Lucille Tyrakowski (Tearaluna)
 ## Goal of the project
 This project is (proudly ?) made in french.
 
