@@ -6,7 +6,7 @@
 
     <form method="post" action="{% url 'Microlly:signup' %}">
         {% include "form_snippet.html" %}
-        <input type="submit" value="S'inscrire">
+        <input type="submit" value="S'inscrire" class="button is-success">
     </form>
     <p>Votre mot de passe doit comporter au minimum 8 caractères.</p>
     {{ posts }}
