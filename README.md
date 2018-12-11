@@ -30,6 +30,7 @@ The concept is simple, a **public blog** where anybody can register and write so
 | As a visitor I can see all the publications from a user (on many pages if necessary) in order to read more from him |
 
 The subject can be found [here](https://www.delahayeyourself.info/modules/LP%20Web%20Dynamique/django/projet/).
+Thre presentation can be found [here](https://docs.google.com/presentation/d/1XHCNQMNqVo_lfPuM2SmqDILuf-K4GcYQjZnAFyZdq4I)
 
 ## Main features
  - Any user can register an account / login / lougout /change password
